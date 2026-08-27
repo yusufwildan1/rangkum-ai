@@ -72,12 +72,12 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
   return (
     <div className="glass rounded-3xl p-6 md:p-8">
       <div className="flex flex-wrap justify-end items-center gap-2 mb-4">
-        <label className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-soft text-sm text-gray-700 dark:text-gray-200">
-          <span>📄</span>
+        <div className="relative inline-flex items-center">
+          <span className="pointer-events-none absolute left-3 text-sm">📄</span>
           <select
             value={paperSize}
             onChange={(e) => setPaperSize(e.target.value)}
-            className="bg-transparent focus:outline-none text-sm"
+            className="appearance-none bg-white/15 dark:bg-gray-800/25 backdrop-blur-md border border-white/30 dark:border-gray-700/30 shadow-xl pl-9 pr-8 py-2 rounded-full text-sm text-gray-700 dark:text-gray-200 hover:scale-105 hover:bg-white/30 dark:hover:bg-gray-700/40 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition cursor-pointer"
           >
             {PAPER_SIZES.map((s) => (
               <option key={s.value} value={s.value} className="text-gray-900">
@@ -85,7 +85,10 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
               </option>
             ))}
           </select>
-        </label>
+          <span className="pointer-events-none absolute right-3 text-xs text-gray-400 dark:text-gray-300">
+            ▾
+          </span>
+        </div>
         <button
           onClick={copyToClipboard}
           className="px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm flex items-center gap-1"
