@@ -1,0 +1,13 @@
+{
+  "framework": "nextjs",
+  "functions": {
+    "app/api/summarize/route.ts": {
+      "maxDuration": 60,
+      "memory": 1024
+    },
+    "app/api/extract/route.ts": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  }
+}
