@@ -12,8 +12,16 @@ interface Props {
   fileName?: string;
 }
 
+const PAPER_SIZES = [
+  { value: 'a5', label: 'A5' },
+  { value: 'b5', label: 'B5' },
+  { value: 'a4', label: 'A4' },
+  { value: 'folio', label: 'Folio' },
+];
+
 const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
   const [copied, setCopied] = React.useState(false);
+  const [paperSize, setPaperSize] = React.useState('a4');
 
   const copyToClipboard = async () => {
     try {
@@ -38,9 +46,46 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
     URL.revokeObjectURL(url);
   };
 
+  const downloadPDF = () => {
+    const html = document.documentElement;
+    const body = document.body;
+
+    const prevPage = html.className.match(/\bpage-[a-z0-9]+/)?.[0] || '';
+    html.classList.remove('page-a5', 'page-b5', 'page-a4', 'page-folio');
+    html.classList.add(`page-${paperSize}`);
+    body.classList.add('printing-summary');
+
+    const cleanup = () => {
+      html.classList.remove('page-a5', 'page-b5', 'page-a4', 'page-folio');
+      if (prevPage) html.classList.add(prevPage);
+      body.classList.remove('printing-summary');
+      window.removeEventListener('afterprint', cleanup);
+    };
+
+    window.addEventListener('afterprint', cleanup);
+    // Fallback untuk browser yang tidak memicu afterprint
+    setTimeout(cleanup, 2000);
+
+    window.print();
+  };
+
   return (
     <div className="glass rounded-3xl p-6 md:p-8">
-      <div className="flex justify-end space-x-2 mb-4">
+      <div className="flex flex-wrap justify-end items-center gap-2 mb-4">
+        <label className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-soft text-sm text-gray-700 dark:text-gray-200">
+          <span>📄</span>
+          <select
+            value={paperSize}
+            onChange={(e) => setPaperSize(e.target.value)}
+            className="bg-transparent focus:outline-none text-sm"
+          >
+            {PAPER_SIZES.map((s) => (
+              <option key={s.value} value={s.value} className="text-gray-900">
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </label>
         <button
           onClick={copyToClipboard}
           className="px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm flex items-center gap-1"
@@ -51,10 +96,16 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
           onClick={downloadMarkdown}
           className="px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm flex items-center gap-1"
         >
-          ⬇️ Download .md
+          ⬇️ .md
+        </button>
+        <button
+          onClick={downloadPDF}
+          className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-105 transition text-sm flex items-center gap-1 shadow"
+        >
+          🖨️ PDF
         </button>
       </div>
-      <div className="prose prose-lg dark:prose-invert max-w-none">
+      <div className="prose prose-lg dark:prose-invert max-w-none print-area">
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath]}
           rehypePlugins={[rehypeKatex]}

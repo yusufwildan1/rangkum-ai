@@ -24,3 +24,56 @@
     @apply bg-white/15 dark:bg-gray-800/25 backdrop-blur-md border border-white/30 dark:border-gray-700/30 shadow-xl;
   }
 }
+
+/* ====== Style untuk cetak / save-as-PDF ====== */
+/* Default ukuran kertas A4 */
+@page {
+  size: A4;
+  margin: 14mm;
+}
+
+@page a5 {
+  size: A5;
+  margin: 12mm;
+}
+@page b5 {
+  size: B5;
+  margin: 12mm;
+}
+@page a4 {
+  size: A4;
+  margin: 14mm;
+}
+@page folio {
+  size: Folio;
+  margin: 14mm;
+}
+
+@media print {
+  /* Sembunyikan semua kecuali area hasil rangkuman */
+  body.printing-summary *,
+  body.printing-summary *::before,
+  body.printing-summary *::after {
+    visibility: hidden;
+  }
+
+  body.printing-summary .print-area,
+  body.printing-summary .print-area *,
+  body.printing-summary .print-area *::before,
+  body.printing-summary .print-area *::after {
+    visibility: visible;
+  }
+
+  body.printing-summary .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* Terapkan ukuran kertas sesuai pilihan pada elemen html */
+  html.page-a5 { @page { size: A5; margin: 12mm; } }
+  html.page-b5 { @page { size: B5; margin: 12mm; } }
+  html.page-a4 { @page { size: A4; margin: 14mm; } }
+  html.page-folio { @page { size: Folio; margin: 14mm; } }
+}
