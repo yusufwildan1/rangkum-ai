@@ -90,13 +90,13 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/60 dark:bg-gray-800/70 border border-white/60 dark:border-gray-700/50 shadow-lg text-gray-800 dark:text-gray-100 hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-700/80 transition text-sm"
           >
             📄 {currentLabel}
             <span className={`text-xs transition-transform ${open ? 'rotate-180' : ''}`}>▾</span>
           </button>
           {open && (
-            <div className="absolute right-0 mt-2 z-30 min-w-[7rem] glass rounded-2xl overflow-hidden p-1">
+            <div className="absolute right-0 mt-2 z-30 min-w-[7rem] bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/60 dark:border-gray-700/50 shadow-2xl rounded-2xl overflow-hidden p-1">
               {PAPER_SIZES.map((s) => (
                 <button
                   key={s.value}
@@ -107,8 +107,8 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
                   }}
                   className={`w-full text-left px-3 py-2 rounded-xl text-sm transition ${
                     paperSize === s.value
-                      ? 'bg-blue-500/20 text-blue-600 dark:text-blue-300 font-semibold'
-                      : 'text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-gray-700/40'
+                      ? 'bg-blue-500/25 text-blue-700 dark:text-blue-300 font-semibold'
+                      : 'text-gray-800 dark:text-gray-100 hover:bg-blue-500/10 dark:hover:bg-gray-700/60'
                   }`}
                 >
                   {s.label}
