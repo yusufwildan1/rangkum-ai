@@ -22,6 +22,20 @@ const PAPER_SIZES = [
 const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
   const [copied, setCopied] = React.useState(false);
   const [paperSize, setPaperSize] = React.useState('a4');
+  const [open, setOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const currentLabel = PAPER_SIZES.find((s) => s.value === paperSize)?.label || 'A4';
 
   const copyToClipboard = async () => {
     try {
@@ -72,22 +86,36 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
   return (
     <div className="glass rounded-3xl p-6 md:p-8">
       <div className="flex flex-wrap justify-end items-center gap-2 mb-4">
-        <div className="relative inline-flex items-center">
-          <span className="pointer-events-none absolute left-3 text-sm">📄</span>
-          <select
-            value={paperSize}
-            onChange={(e) => setPaperSize(e.target.value)}
-            className="appearance-none bg-white/15 dark:bg-gray-800/25 backdrop-blur-md border border-white/30 dark:border-gray-700/30 shadow-xl pl-9 pr-8 py-2 rounded-full text-sm text-gray-700 dark:text-gray-200 hover:scale-105 hover:bg-white/30 dark:hover:bg-gray-700/40 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition cursor-pointer"
+        <div className="relative" ref={dropdownRef}>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm"
           >
-            {PAPER_SIZES.map((s) => (
-              <option key={s.value} value={s.value} className="text-gray-900">
-                {s.label}
-              </option>
-            ))}
-          </select>
-          <span className="pointer-events-none absolute right-3 text-xs text-gray-400 dark:text-gray-300">
-            ▾
-          </span>
+            📄 {currentLabel}
+            <span className={`text-xs transition-transform ${open ? 'rotate-180' : ''}`}>▾</span>
+          </button>
+          {open && (
+            <div className="absolute right-0 mt-2 z-30 min-w-[7rem] glass rounded-2xl overflow-hidden p-1">
+              {PAPER_SIZES.map((s) => (
+                <button
+                  key={s.value}
+                  type="button"
+                  onClick={() => {
+                    setPaperSize(s.value);
+                    setOpen(false);
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-xl text-sm transition ${
+                    paperSize === s.value
+                      ? 'bg-blue-500/20 text-blue-600 dark:text-blue-300 font-semibold'
+                      : 'text-gray-700 dark:text-gray-200 hover:bg-white/30 dark:hover:bg-gray-700/40'
+                  }`}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         <button
           onClick={copyToClipboard}
