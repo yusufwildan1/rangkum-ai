@@ -259,3 +259,25 @@ export const LoaderIcon: React.FC<NeonIconProps> = (p) => {
     </NeonIcon>
   );
 };
+
+export const SparkleIcon: React.FC<NeonIconProps> = (p) => {
+  const id = React.useMemo(nextId, []);
+  return (
+    <NeonIcon id={id} {...p}>
+      <path d="M12 3l1.9 4.9L19 9.8l-5.1 1.9L12 16.6l-1.9-4.9L5 9.8l5.1-1.9z" />
+      <path d="M19 3l.7 1.8L21.5 5.5l-1.8.7L19 8l-.7-1.8-1.8-.7 1.8-.7z" />
+      <path d="M5 15l.55 1.45L7 17l-1.45.55L5 19l-.55-1.45L3 17l1.45-.55z" />
+    </NeonIcon>
+  );
+};
+
+export const TargetIcon: React.FC<NeonIconProps> = (p) => {
+  const id = React.useMemo(nextId, []);
+  return (
+    <NeonIcon id={id} {...p}>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.4" fill="url(#id)" stroke="none" />
+    </NeonIcon>
+  );
+};

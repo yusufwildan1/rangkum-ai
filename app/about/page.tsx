@@ -3,16 +3,22 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
+import {
+  RocketIcon,
+  CalendarIcon,
+  SparkleIcon,
+  TargetIcon,
+} from '@/components/icons/NeonIcons';
 
 interface Feature {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   points: string[];
 }
 
 const FEATURES: Feature[] = [
   {
-    icon: '🚀',
+    icon: <RocketIcon size={22} />,
     title: 'Rangkum AI',
     points: [
       'Merangkum dokumen berformat PDF, DOCX, TXT, dan Markdown secara otomatis.',
@@ -23,7 +29,7 @@ const FEATURES: Feature[] = [
     ],
   },
   {
-    icon: '📅',
+    icon: <CalendarIcon size={22} />,
     title: 'Jadwal Tugas',
     points: [
       'Menambahkan tugas dengan tanggal jatuh tempo.',
@@ -65,7 +71,10 @@ export default function AboutPage() {
 
           <div className="space-y-6 text-gray-700 dark:text-gray-200">
             <section>
-              <h2 className="text-xl font-semibold mb-2">✨ Apa itu?</h2>
+              <h2 className="text-xl font-semibold mb-2">
+                <SparkleIcon size={24} className="inline align-[-3px] mr-2 text-cyan-400" /> Apa
+                itu?
+              </h2>
               <p className="leading-relaxed">
                 J4Students adalah platform yang membantu Anda mengubah dokumen
                 menjadi rangkuman yang lengkap dan terstruktur secara otomatis. Cukup
@@ -75,7 +84,10 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">🎯 Apa saja yang bisa dilakukan?</h2>
+              <h2 className="text-xl font-semibold mb-3">
+                <TargetIcon size={24} className="inline align-[-3px] mr-2 text-fuchsia-400" />{' '}
+                Apa saja yang bisa dilakukan?
+              </h2>
               <div className="space-y-3">
                 {FEATURES.map((feature, index) => {
                   const isOpen = openIndex === index;
@@ -149,7 +161,10 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">🚀 Cara memulai</h2>
+              <h2 className="text-xl font-semibold mb-3">
+                <RocketIcon size={24} className="inline align-[-3px] mr-2 text-blue-400" /> Cara
+                memulai
+              </h2>
               <p className="leading-relaxed">
                 Klik menu <strong>☰</strong> di pojok kanan atas, lalu pilih{' '}
                 <strong>Rangkum AI</strong> untuk mulai mengunggah dokumen dan mendapatkan
