@@ -23,6 +23,22 @@ export default function RangkumDocumentationPage() {
         'Pilihan ukuran kertas PDF: A5, B5, A4, dan Folio.',
         'Animasi ketik kata-per-kata saat hasil ditampilkan agar mudah dibaca.',
       ]}
+      examples={[
+        {
+          title: 'File Asli (Input)',
+          badge: 'Input',
+          fileUrl: '/docs/input-definisi-kup.pdf',
+          fileName: '01. Definisi KUP.pdf',
+          note: 'Dokumen mentah yang diunggah',
+        },
+        {
+          title: 'Hasil Rangkuman (Output)',
+          badge: 'Output',
+          fileUrl: '/docs/hasil-rangkuman-a4.pdf',
+          fileName: 'Perangkum Dokumen AI A4.pdf',
+          note: 'Hasil generate oleh Rangkum AI (A4)',
+        },
+      ]}
       sections={[
         {
           title: 'Cara memulai',

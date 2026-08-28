@@ -4,11 +4,19 @@ import React from 'react';
 import Header from '@/components/Header';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SparkleIcon, ScrollIcon } from '@/components/icons/NeonIcons';
+import { SparkleIcon, ScrollIcon, FileIcon } from '@/components/icons/NeonIcons';
 
 interface DocSection {
   title: string;
   body: string[];
+}
+
+interface DocExample {
+  title: string;
+  badge: string;
+  fileUrl: string;
+  fileName: string;
+  note: string;
 }
 
 interface DocProps {
@@ -20,6 +28,7 @@ interface DocProps {
   glow: string;
   overview: string;
   capabilities: string[];
+  examples?: DocExample[];
   sections: DocSection[];
   toolHref: string;
   toolLabel: string;
@@ -34,6 +43,7 @@ export default function DocPage({
   glow,
   overview,
   capabilities,
+  examples,
   sections,
   toolHref,
   toolLabel,
@@ -87,6 +97,39 @@ export default function DocPage({
                 ))}
               </ul>
             </section>
+
+            {examples && examples.length > 0 && (
+              <section className="mb-8">
+                <h2 className="text-xl font-semibold mb-3">
+                  <FileIcon size={22} className="inline align-[-2px] mr-2" /> Contoh hasil
+                </h2>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {examples.map((ex) => (
+                    <div key={ex.fileUrl} className="glass-soft rounded-2xl p-4">
+                      <div className="flex items-center justify-between gap-3 mb-3">
+                        <div className="min-w-0">
+                          <p className="font-semibold text-gray-800 dark:text-gray-100 truncate">{ex.title}</p>
+                          <p className="text-xs text-gray-500">{ex.note}</p>
+                        </div>
+                        <a
+                          href={ex.fileUrl}
+                          download={ex.fileName}
+                          className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold text-white hover:scale-105 transition-all"
+                          style={{ background: `linear-gradient(135deg, ${color}, var(--neon-purple))`, boxShadow: `0 0 12px ${glow}` }}
+                        >
+                          Unduh
+                        </a>
+                      </div>
+                      <iframe
+                        title={ex.title}
+                        src={`${ex.fileUrl}#toolbar=0&navpanes=0`}
+                        className="w-full h-64 rounded-xl border border-white/10 bg-white"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <section>
               <h2 className="text-xl font-semibold mb-3">
