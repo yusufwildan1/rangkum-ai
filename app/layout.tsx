@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Student Lab',
   description: 'Rangkum dokumen dengan AI & kelola jadwal tugas — PDF, DOCX, TXT, Markdown',
   icons: {
-    icon: '/icon-dark.svg?v=3',
+    icon: '/icon-dark.svg?v=4',
   },
 };
 
