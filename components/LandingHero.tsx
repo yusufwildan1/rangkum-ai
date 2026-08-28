@@ -44,8 +44,8 @@ const LandingHero: React.FC<Props> = ({ onStart }) => {
           onClick={onStart}
           className="group px-10 py-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-semibold shadow-2xl shadow-purple-500/30 hover:scale-105 hover:shadow-purple-400/40 active:scale-95 transition-all duration-300"
         >
-          🚀 Mulai Rangkum
-          <span className="inline-block ml-1 transition-transform group-hover:translate-y-1">↓</span>
+          🚀 Get Start
+          <span className="inline-block ml-1 transition-transform group-hover:translate-x-1">→</span>
         </button>
 
         {/* Badge format file */}
