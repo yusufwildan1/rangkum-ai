@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 
 interface Feature {
@@ -34,6 +34,10 @@ const FEATURES: Feature[] = [
 
 export default function AboutPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    document.title = 'Student Lab - Tentang';
+  }, []);
 
   const toggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));

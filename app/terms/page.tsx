@@ -1,5 +1,7 @@
 import Header from '@/components/Header';
 
+export const metadata = { title: 'Student Lab - Syarat & Ketentuan' };
+
 export default function TermsPage() {
   return (
     <>

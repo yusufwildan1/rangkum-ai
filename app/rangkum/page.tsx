@@ -7,6 +7,8 @@ import { pool } from '@/lib/db';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+export const metadata = { title: 'Student Lab - Rangkum AI' };
+
 export default async function SummarizePage() {
   const session = await auth();
   if (!session?.user?.id) {

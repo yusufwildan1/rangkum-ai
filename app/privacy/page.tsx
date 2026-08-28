@@ -1,5 +1,7 @@
 import Header from '@/components/Header';
 
+export const metadata = { title: 'Student Lab - Privasi' };
+
 export default function PrivacyPage() {
   return (
     <>

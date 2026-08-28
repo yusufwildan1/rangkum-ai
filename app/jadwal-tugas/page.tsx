@@ -7,6 +7,8 @@ import { pool } from '@/lib/db';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+export const metadata = { title: 'Student Lab - Jadwal Tugas' };
+
 export default async function JadwalTugasPage() {
   const session = await auth();
   if (!session?.user?.id) {

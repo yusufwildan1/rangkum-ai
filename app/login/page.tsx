@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    document.title = 'Student Lab - Masuk';
     if (status === 'authenticated') {
       router.push('/rangkum');
     }
