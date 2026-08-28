@@ -64,7 +64,7 @@ export default function DocPage({
       <main className="min-h-screen p-4 md:p-6">
         <div className="max-w-3xl mx-auto">
           <nav className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-            <Link href="/" className="hover:text-cyan-400 transition">Home</Link>
+            <Link href="/" className="hover:text-cyan-400 transition">Beranda</Link>
             <span className="mx-2">/</span>
             <Link href="/#dokumentasi" className="hover:text-cyan-400 transition">Documentation</Link>
             <span className="mx-2">/</span>
@@ -125,7 +125,7 @@ export default function DocPage({
                           className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold text-white hover:scale-105 transition-all"
                           style={{ background: `linear-gradient(135deg, ${color}, var(--neon-purple))`, boxShadow: `0 0 12px ${glow}` }}
                         >
-                          Download
+                          Unduh
                         </a>
                       </div>
                       <iframe
@@ -212,7 +212,7 @@ export default function DocPage({
                 Buka {toolLabel} →
               </Link>
               <Link href="/#dokumentasi" className="px-6 py-3 rounded-full border border-white/20 text-gray-600 dark:text-gray-300 hover:bg-white/5 transition">
-                ← Back to documentation
+                ← Kembali ke dokumentasi
               </Link>
             </div>
           </div>
