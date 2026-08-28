@@ -1,4 +1,5 @@
 import DocPage from '@/components/DocPage';
+import JadwalTugasVisual from '@/components/JadwalTugasVisual';
 import { CalendarIcon } from '@/components/icons/NeonIcons';
 
 export const metadata = {
@@ -9,43 +10,50 @@ export default function JadwalTugasDocumentationPage() {
   return (
     <DocPage
       title="Jadwal Tugas"
-      tagline="Kelola deadline dan tugas kuliah dalam satu tempat yang rapi & terorganisir."
-      badge="Dokumentasi"
+      tagline="Manage your deadlines and college assignments in one tidy, organized place."
+      badge="Documentation"
       icon={<CalendarIcon size={38} />}
       color="var(--neon-pink)"
       glow="rgba(255, 79, 216, 0.35)"
-      overview="Jadwal Tugas adalah tools untuk mengelola semua tugas kuliahmu. Tambahkan tugas beserta tanggal jatuh tempo, tandai yang sudah selesai, dan jaga jadwal tetap rapi — semuanya dalam satu daftar yang mudah digunakan."
+      overview="Jadwal Tugas is a tool for managing all your college assignments. Add tasks with their due dates, mark completed ones, and keep your schedule tidy — all in one easy-to-use list."
       capabilities={[
-        'Menambahkan tugas dengan tanggal jatuh tempo via pemilih kalender.',
-        'Menandai tugas yang sudah selesai dengan animasi coret yang halus.',
-        'Menghapus tugas yang tidak diperlukan lagi.',
-        'Menampilkan tanggal terformat dengan rapi (contoh: 27 Agu 2026).',
-        'Daftar tugas tersimpan secara pribadi untuk setiap pengguna.',
+        'Add assignments with due dates using the calendar picker.',
+        'Mark assignments as done with a smooth strikethrough animation.',
+        'Remove assignments you no longer need.',
+        'Show neatly formatted dates (example: 27 Agu 2026).',
+        'Your task list is stored privately for each user.',
+      ]}
+      visualExamples={[
+        {
+          title: 'Visual preview (animated)',
+          note: 'A live example of the task list in action',
+          view: <JadwalTugasVisual />,
+        },
       ]}
       sections={[
         {
-          title: 'Cara memulai',
+          title: 'Getting started',
           body: [
-            '1. Buka menu Jadwal Tugas (pastikan sudah masuk/login).',
-            '2. Gunakan kolom input untuk menambahkan judul tugas dan pilih tanggal lewat ikon kalender.',
-            '3. Klik tombol "Tambah" untuk memasukkan tugas ke daftar.',
-            '4. Kelola tugas lewat daftar yang tampil secara otomatis.',
+            '1. Open the Jadwal Tugas menu (make sure you are logged in).',
+            '2. Use the input field to add the task title and pick a date via the calendar icon.',
+            '3. Click the "Add" button to place the task on the list.',
+            '4. Manage your tasks from the list that appears automatically.',
           ],
         },
         {
-          title: 'Menandai selesai & menghapus',
+          title: 'Marking done & deleting',
           body: [
-            'Klik tanda centang pada suatu tugas untuk menandainya selesai — ditampilkan dengan animasi coret.',
-            'Gunakan tombol hapus untuk membuang tugas yang tidak diperlukan lagi.',
-            'Tugas yang sudah selesai berpindah secara otomatis di dalam daftar.',
+            'Click the checkmark on a task to mark it done — shown with a strikethrough animation.',
+            'Use the delete button to remove tasks you no longer need.',
+            'Completed tasks move automatically within the list.',
           ],
         },
         {
-          title: 'Tips menjaga produktivitas',
+          title: 'Tips to stay productive',
           body: [
-            'Tambahkan tanggal jatuh tempo untuk setiap tugas agar tidak terlewat.',
-            'Tandai tugas segera setelah selesai untuk menjaga daftar tetap ter-update.',
-            'Jadikan kebiasaan meninjau daftar tugas secara berkala.',
+            'Add a due date to every assignment so nothing is missed.',
+            'Mark tasks as done as soon as you finish to keep the list up to date.',
+            'Make it a habit to review your task list regularly.',
           ],
         },
       ]}

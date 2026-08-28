@@ -19,6 +19,12 @@ interface DocExample {
   note: string;
 }
 
+interface VisualExample {
+  title: string;
+  note: string;
+  view: React.ReactNode;
+}
+
 interface DocProps {
   title: string;
   tagline: string;
@@ -29,6 +35,7 @@ interface DocProps {
   overview: string;
   capabilities: string[];
   examples?: DocExample[];
+  visualExamples?: VisualExample[];
   sections: DocSection[];
   toolHref: string;
   toolLabel: string;
@@ -44,6 +51,7 @@ export default function DocPage({
   overview,
   capabilities,
   examples,
+  visualExamples,
   sections,
   toolHref,
   toolLabel,
@@ -56,7 +64,7 @@ export default function DocPage({
       <main className="min-h-screen p-4 md:p-6">
         <div className="max-w-3xl mx-auto">
           <nav className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-            <Link href="/" className="hover:text-cyan-400 transition">Beranda</Link>
+            <Link href="/" className="hover:text-cyan-400 transition">Home</Link>
             <span className="mx-2">/</span>
             <Link href="/#dokumentasi" className="hover:text-cyan-400 transition">Documentation</Link>
             <span className="mx-2">/</span>
@@ -86,7 +94,7 @@ export default function DocPage({
 
             <section className="mb-8">
               <h2 className="text-xl font-semibold mb-3">
-                <SparkleIcon size={22} className="inline align-[-2px] mr-2" /> Yang bisa dibuat &amp; dilakukan
+                <SparkleIcon size={22} className="inline align-[-2px] mr-2" /> What you can create &amp; do
               </h2>
               <ul className="space-y-2">
                 {capabilities.map((c, i) => (
@@ -98,13 +106,13 @@ export default function DocPage({
               </ul>
             </section>
 
-            {examples && examples.length > 0 && (
+            {(examples?.length || visualExamples?.length) && (
               <section className="mb-8">
                 <h2 className="text-xl font-semibold mb-3">
-                  <FileIcon size={22} className="inline align-[-2px] mr-2" /> Contoh hasil
+                  <FileIcon size={22} className="inline align-[-2px] mr-2" /> Output examples
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2">
-                  {examples.map((ex) => (
+                  {examples?.map((ex) => (
                     <div key={ex.fileUrl} className="glass-soft rounded-2xl p-4">
                       <div className="flex items-center justify-between gap-3 mb-3">
                         <div className="min-w-0">
@@ -117,7 +125,7 @@ export default function DocPage({
                           className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold text-white hover:scale-105 transition-all"
                           style={{ background: `linear-gradient(135deg, ${color}, var(--neon-purple))`, boxShadow: `0 0 12px ${glow}` }}
                         >
-                          Unduh
+                          Download
                         </a>
                       </div>
                       <iframe
@@ -127,13 +135,20 @@ export default function DocPage({
                       />
                     </div>
                   ))}
+                  {visualExamples?.map((ve) => (
+                    <div key={ve.title} className="glass-soft rounded-2xl p-4">
+                      <p className="font-semibold text-gray-800 dark:text-gray-100">{ve.title}</p>
+                      <p className="text-xs text-gray-500 mb-3">{ve.note}</p>
+                      <div className="rounded-xl border border-white/10 overflow-hidden">{ve.view}</div>
+                    </div>
+                  ))}
                 </div>
               </section>
             )}
 
             <section>
               <h2 className="text-xl font-semibold mb-3">
-                <ScrollIcon size={22} className="inline align-[-2px] mr-2" /> Panduan penggunaan
+                <ScrollIcon size={22} className="inline align-[-2px] mr-2" /> Usage guide
               </h2>
               <div className="space-y-3">
                 {sections.map((section, index) => {
@@ -197,7 +212,7 @@ export default function DocPage({
                 Buka {toolLabel} →
               </Link>
               <Link href="/#dokumentasi" className="px-6 py-3 rounded-full border border-white/20 text-gray-600 dark:text-gray-300 hover:bg-white/5 transition">
-                ← Kembali ke dokumentasi
+                ← Back to documentation
               </Link>
             </div>
           </div>
