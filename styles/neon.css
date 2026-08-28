@@ -269,7 +269,7 @@ body.nk-body::after {
 .project { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 26px; padding: 22px; position: relative; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); backdrop-filter: blur(12px); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; display: flex; flex-direction: column; }
 .project:hover { transform: translateY(-6px); border-color: var(--pc); box-shadow: 0 0 34px var(--pc-glow, rgba(34, 224, 255, 0.25)); }
 .project-art { height: 150px; border-radius: 16px; background: radial-gradient(circle at 20% 30%, var(--pc), transparent 42%), rgba(255, 255, 255, 0.04); position: relative; overflow: hidden; display: grid; place-items: center; margin-bottom: 18px; border: 1px solid var(--card-border); }
-.project-art.project-art-j4, .project-art.project-art-up { height: 190px; place-items: stretch; background: radial-gradient(circle at 20% 30%, var(--pc, rgba(34, 224, 255, 0.35)), transparent 55%), rgba(255, 255, 255, 0.04); }
+.project-art.project-art-j4, .project-art.project-art-up, .project-art.project-art-tugas { height: 190px; place-items: stretch; background: radial-gradient(circle at 20% 30%, var(--pc, rgba(34, 224, 255, 0.35)), transparent 55%), rgba(255, 255, 255, 0.04); }
 .project h3 { font-family: var(--display); font-size: 1.4rem; margin: 4px 0 8px; color: var(--ink); }
 .project > p { color: var(--ink-soft); font-size: 0.97rem; flex: 1; }
 .project-tags { display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
@@ -318,6 +318,11 @@ body.nk-body::after {
 .j4-progress-fill { position: absolute; inset: 0; width: 68%; background: linear-gradient(90deg, var(--pc), var(--neon-green)); box-shadow: 0 0 14px var(--pc-glow); display: flex; align-items: center; justify-content: flex-end; animation: progress-flow 3s ease-in-out infinite alternate; }
 @keyframes progress-flow { from { width: 68%; opacity: 0.9; } to { width: 86%; opacity: 1; } }
 .j4-progress-label { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; color: #05070c; padding-right: 7px; }
+
+/* Badge tanggal jatuh tempo pada kartu Tugas */
+.j4-due { margin-left: auto; flex: none; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; color: var(--neon-cyan); background: rgba(34, 224, 255, 0.1); border: 1px solid rgba(34, 224, 255, 0.3); padding: 2px 8px; border-radius: 999px; text-shadow: 0 0 8px rgba(34, 224, 255, 0.5); }
+@keyframes taskCheck { 0%, 20% { background: transparent; } 50%, 100% { background: var(--neon-green); box-shadow: 0 0 10px rgba(57, 255, 176, 0.8); } }
+@keyframes taskDim { 0%, 20% { opacity: 1; text-decoration: none; } 50%, 100% { opacity: 0.55; text-decoration: line-through; } }
 
 /* ---------- Contact ---------- */
 .contact-card { background: radial-gradient(circle at 15% 20%, rgba(34, 224, 255, 0.15), transparent 40%), radial-gradient(circle at 85% 80%, rgba(255, 79, 216, 0.15), transparent 40%), var(--card-bg); border: 1px solid var(--card-border); border-radius: 34px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.6); backdrop-filter: blur(14px); padding: 56px 32px; text-align: center; position: relative; overflow: hidden; }

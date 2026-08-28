@@ -147,6 +147,40 @@ function ProjectArtUpcoming({ color }: { color: string }) {
   );
 }
 
+const tugasItems = [
+  { label: 'Makalah Ekonomi', due: 'Sen 12' },
+  { label: 'Latihan Kalkulus', due: 'Rab 14' },
+  { label: 'PPT Bahasa Inggris', due: 'Jum 16' },
+];
+
+function ProjectArtTugas() {
+  return (
+    <div className="j4-app" style={{ ['--pc' as string]: 'var(--neon-pink)' } as React.CSSProperties}>
+      <div className="j4-top">
+        <span className="j4-dot"></span>
+        <span className="j4-name">Jadwal Tugas</span>
+        <span className="j4-live">● live</span>
+      </div>
+      <div className="j4-heading">Tugas Terdekat</div>
+      {tugasItems.map((t, i) => (
+        <div className="j4-task" key={t.label}>
+          <span
+            className="j4-check"
+            style={{ animation: `taskCheck 4.5s ease-in-out ${i * 1.5}s infinite` }}
+          ></span>
+          <span
+            className="j4-task-label"
+            style={{ animation: `taskDim 4.5s ease-in-out ${i * 1.5}s infinite` }}
+          >
+            {t.label}
+          </span>
+          <span className="j4-due">{t.due}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ===== data (dari portfolio asli + integrasi tools) =====
 const statsDefs = [
   { end: 2, suffix: '+', label: 'Tahun Pengalaman' },
@@ -185,12 +219,13 @@ const projects = [
   },
   {
     num: '02',
-    title: 'Coming Soon',
-    desc: 'Segera hadir.',
-    tags: ['Segera'],
+    title: 'Tugas',
+    desc: 'Kelola tugas kuliah — tambah deadline, tandai selesai, dan rapiin jadwalmu dalam satu tempat.',
+    tags: ['Deadline', 'Checklist'],
     color: 'var(--neon-pink)',
     glow: 'rgba(255, 79, 216, 0.35)',
-    kind: 'up',
+    kind: 'tugas',
+    href: '/jadwal-tugas',
   },
   {
     num: '03',
@@ -348,8 +383,8 @@ export default function LandingPage() {
           <div className="projects">
             {projects.map((p) => (
               <div key={p.num} className="project" style={{ '--pc': p.color, '--pc-glow': p.glow } as React.CSSProperties}>
-                <div className={`project-art ${p.kind === 'j4' ? 'project-art-j4' : 'project-art-up'}`}>
-                  {p.kind === 'j4' ? <ProjectArtJ4 /> : <ProjectArtUpcoming color={p.color} />}
+                <div className={`project-art ${p.kind === 'j4' ? 'project-art-j4' : p.kind === 'tugas' ? 'project-art-tugas' : 'project-art-up'}`}>
+                  {p.kind === 'j4' ? <ProjectArtJ4 /> : p.kind === 'tugas' ? <ProjectArtTugas /> : <ProjectArtUpcoming color={p.color} />}
                 </div>
                 <h3>{p.title}</h3>
                 <p>{p.desc}</p>
