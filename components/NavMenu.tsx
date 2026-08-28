@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   HomeIcon,
   InfoIcon,
@@ -73,90 +74,110 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
         </span>
       </button>
 
-      {open && (
-        <div className="nk-menu-panel absolute right-0 mt-2 z-30 w-64 rounded-3xl overflow-hidden p-2 shadow-2xl">
-          <div className="px-3 pb-2 pt-1 text-xs uppercase tracking-wider text-gray-500">
-            Menu
-          </div>
-          <nav className="space-y-1">
-            {items.map((item) => (
-              <Link
-                key={item.href + item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-2xl transition ${
-                  isActive(item.href)
-                    ? 'bg-[--nk-cyan]/15 text-[--nk-cyan]'
-                    : 'hover:bg-white/5'
-                }`}
-              >
-                <span className="flex items-center">{item.icon}</span>
-                <span className="flex-1">
-                  <span className="block font-medium">{item.label}</span>
-                  {item.description && (
-                    <span className="block text-xs text-gray-500">
-                      {item.description}
-                    </span>
-                  )}
-                </span>
-                {isActive(item.href) && <span className="text-[--nk-cyan]">•</span>}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="mt-2 pt-2 border-t border-[--nk-border]/60">
-            {status === 'authenticated' && session?.user ? (
-              <div className="px-3 py-2 flex items-center gap-3">
-                {session.user.image ? (
-                  <img
-                    src={session.user.image}
-                    alt="avatar"
-                    className="w-9 h-9 rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[--nk-cyan] to-[--nk-purple] flex items-center justify-center text-black font-bold">
-                    {(session.user.name?.[0] || '?').toUpperCase()}
-                  </div>
-                )}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">
-                    {session.user.name || 'Pengguna'}
-                  </p>
-                  {session.user.email && (
-                    <p className="text-xs text-gray-500 truncate">
-                      {session.user.email}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className="px-3 py-2 text-sm">
-                <p className="text-gray-500 mb-1">
-                  Masuk untuk menyimpan data kamu.
-                </p>
-              </div>
-            )}
-
-            <div className="p-1">
-              {status === 'authenticated' ? (
-                <button
-                  onClick={() => signOut({ callbackUrl: '/' })}
-                  className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-red-400 hover:bg-red-500/10 transition"
-                >
-                  <LogoutIcon size={19} /> Keluar
-                </button>
-              ) : (
-                <button
-                  onClick={() => signIn('google', { callbackUrl: '/rangkum' })}
-                  className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-[--nk-cyan] hover:bg-white/5 transition"
-                >
-                  <LoginIcon size={19} /> Masuk
-                </button>
-              )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="menu-panel"
+            initial={{ opacity: 0, scale: 0.9, y: -8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -6 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+            className="nk-menu-panel absolute right-0 mt-2 z-30 w-64 rounded-3xl overflow-hidden p-2 shadow-2xl origin-top-right"
+          >
+            <div className="px-3 pb-2 pt-1 text-xs uppercase tracking-wider text-gray-500">
+              Menu
             </div>
-          </div>
-        </div>
-      )}
+            <nav className="space-y-1">
+              {items.map((item, i) => (
+                <motion.div
+                  key={item.href + item.label}
+                  initial={{ opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 + i * 0.05, type: 'spring', stiffness: 320, damping: 26 }}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-2xl transition ${
+                      isActive(item.href)
+                        ? 'bg-[--nk-cyan]/15 text-[--nk-cyan]'
+                        : 'hover:bg-white/5'
+                    }`}
+                  >
+                    <span className="flex items-center">{item.icon}</span>
+                    <span className="flex-1">
+                      <span className="block font-medium">{item.label}</span>
+                      {item.description && (
+                        <span className="block text-xs text-gray-500">
+                          {item.description}
+                        </span>
+                      )}
+                    </span>
+                    {isActive(item.href) && <span className="text-[--nk-cyan]">•</span>}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.05 + items.length * 0.05, duration: 0.25 }}
+              className="mt-2 pt-2 border-t border-[--nk-border]/60"
+            >
+              {status === 'authenticated' && session?.user ? (
+                <div className="px-3 py-2 flex items-center gap-3">
+                  {session.user.image ? (
+                    <img
+                      src={session.user.image}
+                      alt="avatar"
+                      className="w-9 h-9 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[--nk-cyan] to-[--nk-purple] flex items-center justify-center text-black font-bold">
+                      {(session.user.name?.[0] || '?').toUpperCase()}
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate">
+                      {session.user.name || 'Pengguna'}
+                    </p>
+                    {session.user.email && (
+                      <p className="text-xs text-gray-500 truncate">
+                        {session.user.email}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="px-3 py-2 text-sm">
+                  <p className="text-gray-500 mb-1">
+                    Masuk untuk menyimpan data kamu.
+                  </p>
+                </div>
+              )}
+
+              <div className="p-1">
+                {status === 'authenticated' ? (
+                  <button
+                    onClick={() => signOut({ callbackUrl: '/' })}
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-red-400 hover:bg-red-500/10 transition"
+                  >
+                    <LogoutIcon size={19} /> Keluar
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => signIn('google', { callbackUrl: '/rangkum' })}
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-[--nk-cyan] hover:bg-white/5 transition"
+                  >
+                    <LoginIcon size={19} /> Masuk
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
