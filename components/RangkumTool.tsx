@@ -5,7 +5,7 @@ import FileUpload from '@/components/FileUpload';
 import SummaryOutput from '@/components/SummaryOutput';
 import History from '@/components/History';
 import BackToTop from '@/components/BackToTop';
-import { PREVIEW_LENGTH } from '@/lib/constants';
+import { PREVIEW_LENGTH, MAX_FILE_SIZE_MB } from '@/lib/constants';
 import { RocketIcon, FileIcon, AlertIcon, LoaderIcon } from '@/components/icons/NeonIcons';
 
 export interface HistoryItem {
@@ -105,16 +105,50 @@ export default function RangkumTool({ initialHistory }: Props) {
 
   return (
     <>
-      <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-300 dark:to-purple-300 flex items-center justify-center gap-3">
-          <RocketIcon size={34} /> Rangkum AI
+      <div className="text-center mb-10">
+        <h1 className="hero-title">
+          <span className="swash"><span className="squiggle">Desain</span></span>{' '}
+          yang <br />
+          <span className="u-underline">bercerita</span>, <br />
+          <span className="hing">kode yang</span>{' '}
+          <span className="rot">berbicara.</span>
         </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Upload file, dapatkan rangkuman lengkap dengan glosarium, tips, dan action items!
-        </p>
+        <p className="hero-note mt-4">rangkum dokumenmu jadi ringkas & jelas</p>
       </div>
 
       <FileUpload onFileSelect={handleFileChange} />
+
+      <div className="mt-4 flex flex-col sm:flex-row items-start gap-3 p-4 glass-soft rounded-2xl text-sm text-gray-600 dark:text-gray-300">
+        <span className="shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-500 dark:text-blue-300">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+        </span>
+        <p className="leading-relaxed">
+          <strong className="text-gray-800 dark:text-gray-100">Batas file:</strong> dokumen maksimal{' '}
+          <b>{MAX_FILE_SIZE_MB}MB</b> dan teks maksimal 12.000 karakter. Kalau file-mu lebih besar,
+          kompres dulu ukurannya sebelum di-upload — coba rekomendasi berikut:
+          <span className="inline-flex flex-wrap gap-2 mt-2">
+            <a
+              href="https://www.ilovepdf.com/compress_pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1 rounded-full border border-blue-400/40 text-blue-600 dark:text-blue-300 hover:bg-blue-500/10 transition-all"
+            >
+              Kompres PDF (iLovePDF)
+            </a>
+            <a
+              href="https://smallpdf.com/compress-pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1 rounded-full border border-purple-400/40 text-purple-600 dark:text-purple-300 hover:bg-purple-500/10 transition-all"
+            >
+              Kompres PDF (Smallpdf)
+            </a>
+          </span>
+        </p>
+      </div>
 
       {file && rawText && (
         <div className="mt-4 p-4 glass-soft rounded-2xl">
