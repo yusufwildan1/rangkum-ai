@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import LiveVisitorCount from '@/components/LiveVisitorCount';
 
 // ===== count-up untuk stats (dari portfolio asli) =====
 function useCountUp(end: number, ref: React.RefObject<HTMLDivElement>, duration = 1400) {
@@ -199,7 +200,6 @@ function ProjectArtTugas() {
 const statsDefs = [
   { end: 2, suffix: '+', label: 'Tahun Pengalaman' },
   { end: 2, suffix: '', label: 'Proyek (Demo)' },
-  { end: 1, suffix: '', label: 'Pengguna' },
 ];
 
 function StatItem({ end, suffix, label }: { end: number; suffix: string; label: string }) {
@@ -361,6 +361,7 @@ export default function LandingPage() {
         {/* Stats */}
         <section className="stats" style={{ marginTop: 76 }}>
           {statsDefs.map((s) => <StatItem key={s.label} {...s} />)}
+          <LiveVisitorCount />
         </section>
 
         {/* Tentang */}

@@ -229,6 +229,7 @@ body.nk-body::after {
 .stat:hover strong { transform: scale(1.1); text-shadow: 0 0 30px rgba(34, 224, 255, 0.9); }
 .stat span { color: var(--ink-soft); font-weight: 600; transition: color 0.25s ease; }
 .stat:hover span { color: var(--ink); }
+.stat .stat-live { font-style: normal; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; color: var(--neon-green); text-shadow: 0 0 10px rgba(57, 255, 176, 0.7); animation: live-blink 1.6s ease-in-out infinite; }
 @media (max-width: 680px) { .stats { grid-template-columns: 1fr; } }
 
 /* ---------- Sections ---------- */

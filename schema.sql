@@ -78,3 +78,11 @@ CREATE TABLE IF NOT EXISTS "tasks" (
   FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE
 );
 CREATE INDEX IF NOT EXISTS "tasks_userId_idx" ON "tasks"("userId");
+
+-- Tabel aplikasi: statistik kunjungan situs (visitor counter)
+-- Satu baris tunggal menyimpan total kunjungan unik.
+CREATE TABLE IF NOT EXISTS "site_stats" (
+  "id" TEXT PRIMARY KEY DEFAULT 'site',
+  "total_visits" BIGINT NOT NULL DEFAULT 0,
+  "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
