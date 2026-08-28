@@ -4,6 +4,7 @@ import '../styles/globals.css';
 import '../styles/neon.css';
 import { ThemeProvider } from 'next-themes';
 import Provider from '@/components/Provider';
+import PageTransition from '@/components/PageTransition';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,7 +33,9 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} nk-body min-h-screen text-gray-100 transition-colors`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <Provider>{children}</Provider>
+          <Provider>
+            <PageTransition>{children}</PageTransition>
+          </Provider>
         </ThemeProvider>
       </body>
     </html>
