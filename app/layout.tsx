@@ -5,6 +5,7 @@ import '../styles/neon.css';
 import { ThemeProvider } from 'next-themes';
 import Provider from '@/components/Provider';
 import PageTransition from '@/components/PageTransition';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
             <PageTransition>{children}</PageTransition>
           </Provider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
