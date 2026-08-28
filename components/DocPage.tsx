@@ -3,6 +3,8 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SparkleIcon, ScrollIcon } from '@/components/icons/NeonIcons';
 
 interface DocSection {
   title: string;
@@ -73,7 +75,9 @@ export default function DocPage({
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold mb-3">✨ Yang bisa dibuat &amp; dilakukan</h2>
+              <h2 className="text-xl font-semibold mb-3">
+                <SparkleIcon size={22} className="inline align-[-2px] mr-2" /> Yang bisa dibuat &amp; dilakukan
+              </h2>
               <ul className="space-y-2">
                 {capabilities.map((c, i) => (
                   <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-gray-200">
@@ -85,28 +89,57 @@ export default function DocPage({
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">📖 Panduan penggunaan</h2>
+              <h2 className="text-xl font-semibold mb-3">
+                <ScrollIcon size={22} className="inline align-[-2px] mr-2" /> Panduan penggunaan
+              </h2>
               <div className="space-y-3">
                 {sections.map((section, index) => {
                   const open = active === index;
                   return (
-                    <div key={section.title}>
+                    <motion.div key={section.title} whileHover={{ scale: 1.008 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}>
                       <button
                         type="button"
                         onClick={() => setActive((prev) => (prev === index ? null : index))}
                         className="w-full glass-soft rounded-2xl px-4 py-3.5 text-left flex items-center justify-between gap-3 hover:bg-white/10 dark:hover:bg-gray-700/30 transition"
                       >
                         <span className="font-medium text-gray-800 dark:text-gray-100">{section.title}</span>
-                        <span className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}>▾</span>
+                        <motion.span
+                          animate={{ rotate: open ? 180 : 0 }}
+                          transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+                          className={`flex items-center justify-center w-7 h-7 rounded-full text-sm ${
+                            open ? 'text-white' : 'text-gray-400'
+                          }`}
+                          style={{ background: open ? `linear-gradient(135deg, ${color}, var(--neon-purple))` : 'rgba(255,255,255,0.06)', boxShadow: open ? `0 0 14px ${glow}` : 'none' }}
+                        >
+                          ▾
+                        </motion.span>
                       </button>
-                      {open && (
-                        <div className="px-4 py-3 text-gray-600 dark:text-gray-300 leading-relaxed">
-                          {section.body.map((b, i) => (
-                            <p key={i} className="mb-2">{b}</p>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+
+                      <AnimatePresence initial={false}>
+                        {open && (
+                          <motion.div
+                            key="body"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
+                            className="overflow-hidden px-4 py-3 text-gray-600 dark:text-gray-300 leading-relaxed"
+                          >
+                            {section.body.map((b, i) => (
+                              <motion.p
+                                key={i}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.08 * i, duration: 0.22 }}
+                                className="mb-2"
+                              >
+                                {b}
+                              </motion.p>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
                   );
                 })}
               </div>
