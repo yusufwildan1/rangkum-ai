@@ -4,6 +4,7 @@ import { useState } from 'react';
 import FileUpload from '@/components/FileUpload';
 import SummaryOutput from '@/components/SummaryOutput';
 import History from '@/components/History';
+import BackToTop from '@/components/BackToTop';
 import { PREVIEW_LENGTH } from '@/lib/constants';
 import { RocketIcon, FileIcon, AlertIcon, LoaderIcon } from '@/components/icons/NeonIcons';
 
@@ -178,6 +179,8 @@ export default function RangkumTool({ initialHistory }: Props) {
         onClear={(id) => clearHistory(id)}
         onClearAll={() => clearHistory()}
       />
+
+      <BackToTop />
     </>
   );
 }

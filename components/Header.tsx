@@ -9,11 +9,19 @@ import { SunIcon, MoonIcon } from './icons/NeonIcons';
 export default function Header() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
 
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="nk-topbar sticky top-0 z-20 shadow-lg">
+    <header className={`nk-topbar sticky top-0 z-20 shadow-lg${scrolled ? ' nk-topbar-scrolled' : ''}`}>
       <div className="max-w-4xl mx-auto flex justify-between items-center px-4 py-3">
         <Link href="/" className="j4-logo text-xl md:text-2xl flex items-center gap-1">
           <span className="j4-logo-dot" /> J4<span className="hidden sm:inline">Students</span>
