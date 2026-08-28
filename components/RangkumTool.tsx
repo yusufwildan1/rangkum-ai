@@ -108,7 +108,6 @@ export default function RangkumTool({ initialHistory }: Props) {
       <div className="text-center mb-10">
         <h1 className="hero-title">
           <span className="swash"><span className="squiggle">Rangkum</span></span>{' '}
-          <br />
           <span className="rot">AI</span>
         </h1>
         <p className="hero-note mt-4">rangkum dokumenmu jadi ringkas & jelas</p>
