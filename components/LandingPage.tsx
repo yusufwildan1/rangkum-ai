@@ -198,7 +198,7 @@ function ProjectArtTugas() {
 // ===== data (dari portfolio asli + integrasi tools) =====
 const statsDefs = [
   { end: 2, suffix: '+', label: 'Tahun Pengalaman' },
-  { end: 1, suffix: '', label: 'Proyek (Demo)' },
+  { end: 2, suffix: '', label: 'Proyek (Demo)' },
   { end: 1, suffix: '', label: 'Pengguna' },
 ];
 
