@@ -256,6 +256,11 @@ body.nk-body::after {
 .doc-cta span { color: var(--neon-cyan); }
 @media (max-width: 900px) { .docs-grid { grid-template-columns: 1fr; } }
 
+/* Halaman indeks Documentation */
+.doc-index-card:hover { box-shadow: 0 0 34px var(--dg, rgba(34, 224, 255, 0.3)); border-color: var(--dc, #22e0ff); }
+.doc-index-card .doc-index-icon { transition: transform 0.3s, box-shadow 0.3s; }
+.doc-index-card:hover .doc-index-icon { transform: scale(1.06); box-shadow: 0 0 24px var(--dg); }
+
 /* ---------- About ---------- */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 .about-card { background: var(--card-bg); border: 1px solid var(--card-border); border-top: 3px solid var(--neon-cyan); border-radius: 24px; padding: 30px; font-size: 1.08rem; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); backdrop-filter: blur(12px); }

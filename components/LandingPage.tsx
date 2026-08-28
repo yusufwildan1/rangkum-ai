@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 // ===== count-up untuk stats (dari portfolio asli) =====
 function useCountUp(end: number, ref: React.RefObject<HTMLDivElement>, duration = 1400) {
@@ -276,100 +276,27 @@ function Marquee({ words }: { words: string[] }) {
   );
 }
 
-// ===== Documentation (apa yang bisa dibuat dari tiap tools) =====
+// ===== Documentation (kartu bergaya portfolio, menuju halaman dokumentasi per tools) =====
 const docs = [
   {
-    num: 'A',
     title: 'Rangkum AI',
-    badge: 'Generate',
+    desc: 'Baca dokumentasi lengkap Rangkum AI — cara mengunggah, merangkum, mengekspor, hingga tips hasil terbaik.',
+    tags: ['Panduan', 'Generate'],
     color: 'var(--neon-cyan)',
-    glow: 'rgba(34, 224, 255, 0.4)',
-    intro: 'Ubah dokumen menjadi catatan belajar yang siap dipakai.',
-    capabilities: [
-      'Rangkum PDF, DOCX, TXT & Markdown secara otomatis dengan AI.',
-      'Hasil lengkap: ringkasan eksekutif, poin penting, glosarium, & action items.',
-      'Salin, unduh Markdown, atau ekspor jadi PDF (A5/B5/A4/Folio).',
-      'Animasi ketik kata-per-kata saat hasil ditampilkan.',
-      'Riwayat rangkuman tersimpan untuk dibuka ulang kapan saja.',
-    ],
-    href: '/rangkum',
+    glow: 'rgba(34, 224, 255, 0.35)',
+    href: '/documentation/rangkum',
+    art: <ProjectArtJ4 />,
   },
   {
-    num: 'B',
     title: 'Jadwal Tugas',
-    badge: 'Kelola',
+    desc: 'Baca dokumentasi lengkap Jadwal Tugas — kelola deadline, tandai selesai, hingga tips menjaga produktivitas.',
+    tags: ['Panduan', 'Kelola'],
     color: 'var(--neon-pink)',
-    glow: 'rgba(255, 79, 216, 0.4)',
-    intro: 'Kelola deadline kuliah dalam satu tempat yang rapi.',
-    capabilities: [
-      'Tambahkan tugas plus tanggal jatuh tempo via kalender.',
-      'Tandai tugas selesai dengan animasi coret yang halus.',
-      'Hapus tugas yang tidak diperlukan lagi.',
-      'Tampilkan daftar tugas terdekat dengan tanggal terformat (mis. 27 Agu 2026).',
-    ],
-    href: '/jadwal-tugas',
+    glow: 'rgba(255, 79, 216, 0.35)',
+    href: '/documentation/jadwal-tugas',
+    art: <ProjectArtTugas />,
   },
 ];
-
-function DocCard({ d, index }: { d: (typeof docs)[number]; index: number }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, delay: index * 0.12 }}
-      className={`doc-card ${open ? 'doc-card-open' : ''}`}
-      style={{ '--doc': d.color, '--doc-glow': d.glow } as React.CSSProperties}
-    >
-      <button type="button" className="doc-head" onClick={() => setOpen((o) => !o)}>
-        <span className="doc-num">{d.num}</span>
-        <span className="doc-head-text">
-          <span className="doc-title">{d.title}</span>
-          <span className="doc-intro">{d.intro}</span>
-        </span>
-        <motion.span
-          className="doc-toggle"
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-        >
-          ▾
-        </motion.span>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="doc-body"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
-            className="doc-body"
-          >
-            <div className="doc-badge">{d.badge}</div>
-            <ul className="doc-list">
-              {d.capabilities.map((c, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.05 * i, duration: 0.22 }}
-                >
-                  {c}
-                </motion.li>
-              ))}
-            </ul>
-            <Link href={d.href} className="doc-cta">
-              Buka {d.title} <span>→</span>
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
 
 export default function LandingPage() {
   const marqueeWords = ['Suka bermain warna', 'Desain kreatif', 'Cerita dibalik layar', 'Tanpa batas imajinasi'];
@@ -517,11 +444,19 @@ export default function LandingPage() {
             <h2 className="section-title">Documentation</h2>
           </div>
           <p className="section-sub">
-            Pilih tools untuk melihat apa saja yang bisa kamu buat &amp; lakukan.
+            Pilih tools untuk membaca dokumentasi lengkap &amp; apa yang bisa dibuat.
           </p>
-          <div className="docs-grid">
-            {docs.map((d, i) => (
-              <DocCard key={d.title} d={d} index={i} />
+          <div className="projects">
+            {docs.map((d) => (
+              <div key={d.title} className="project" style={{ '--pc': d.color, '--pc-glow': d.glow } as React.CSSProperties}>
+                <div className="project-art project-art-j4">{d.art}</div>
+                <h3>{d.title}</h3>
+                <p>{d.desc}</p>
+                <div className="project-tags">
+                  {d.tags.map((t) => <span key={t} className="ptag">{t}</span>)}
+                </div>
+                <Link href={d.href} className="project-link" style={{ marginTop: 'auto' }}>buka dokumentasi <span>→</span></Link>
+              </div>
             ))}
           </div>
         </section>

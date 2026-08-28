@@ -12,6 +12,7 @@ import {
   CalendarIcon,
   LogoutIcon,
   LoginIcon,
+  ScrollIcon,
 } from '@/components/icons/NeonIcons';
 
 interface MenuItem {
@@ -30,6 +31,7 @@ const DEFAULT_ITEMS: MenuItem[] = [
   { label: 'Tentang', icon: <InfoIcon size={20} />, href: '/about' },
   { label: 'Rangkum AI', icon: <RocketIcon size={20} />, href: '/rangkum', description: 'Upload & rangkum dokumen' },
   { label: 'Jadwal Tugas', icon: <CalendarIcon size={20} />, href: '/jadwal-tugas', description: 'Kelola deadline tugas' },
+  { label: 'Documentation', icon: <ScrollIcon size={20} />, href: '/documentation', description: 'Panduan lengkap tools' },
 ];
 
 const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
