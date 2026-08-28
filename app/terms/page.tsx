@@ -10,14 +10,14 @@ export default function TermsPage() {
             📄 Syarat &amp; Ketentuan
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center">
-            Berlaku untuk situs <strong>Rangkum AI</strong> — terakhir diperbarui: Agustus 2026
+            Berlaku untuk situs <strong>J4Students</strong> — terakhir diperbarui: Agustus 2026
           </p>
 
           <div className="space-y-6 leading-relaxed">
             <section>
               <h2 className="text-xl font-semibold mb-2">1. Penerimaan Syarat</h2>
               <p>
-                Dengan menggunakan Rangkum AI, Anda dianggap telah membaca, memahami,
+                Dengan menggunakan J4Students, Anda dianggap telah membaca, memahami,
                 dan menyetujui seluruh syarat dan ketentuan ini. Jika Anda tidak
                 setuju, mohon tidak menggunakan layanan ini.
               </p>

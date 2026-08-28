@@ -51,7 +51,7 @@ export default function AboutPage() {
             <h1 className="text-3xl md:text-4xl font-bold mb-3">
               Tentang{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-300 dark:to-purple-300">
-                Perangkum Dokumen AI
+                J4Students
               </span>
             </h1>
           </div>
@@ -60,7 +60,7 @@ export default function AboutPage() {
             <section>
               <h2 className="text-xl font-semibold mb-2">✨ Apa itu?</h2>
               <p className="leading-relaxed">
-                Perangkum Dokumen AI adalah platform yang membantu Anda mengubah dokumen
+                J4Students adalah platform yang membantu Anda mengubah dokumen
                 menjadi rangkuman yang lengkap dan terstruktur secara otomatis. Cukup
                 unggah file, dan AI akan menyusunnya menjadi catatan rapi yang siap
                 dipelajari.

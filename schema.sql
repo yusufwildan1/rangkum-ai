@@ -72,6 +72,8 @@ CREATE TABLE IF NOT EXISTS "tasks" (
   "title" TEXT NOT NULL,
   "dueDate" TEXT,
   "done" BOOLEAN DEFAULT FALSE,
+  "fileName" TEXT,
+  "content" TEXT,
   "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE
 );

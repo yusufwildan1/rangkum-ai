@@ -6,6 +6,13 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import {
+  FileIcon,
+  ClipboardIcon,
+  CheckIcon,
+  DownloadIcon,
+  PrinterIcon,
+} from '@/components/icons/NeonIcons';
 
 interface Props {
   summary: string;
@@ -92,7 +99,7 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
             onClick={() => setOpen((o) => !o)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/60 dark:bg-gray-800/70 border border-white/60 dark:border-gray-700/50 shadow-lg text-gray-800 dark:text-gray-100 hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-700/80 transition text-sm"
           >
-            📄 {currentLabel}
+            <FileIcon size={17} /> {currentLabel}
             <span className={`text-xs transition-transform ${open ? 'rotate-180' : ''}`}>▾</span>
           </button>
           {open && (
@@ -121,19 +128,27 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
           onClick={copyToClipboard}
           className="px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm flex items-center gap-1"
         >
-          {copied ? '✅ Tersalin' : '📋 Salin'}
+          {copied ? (
+            <span className="flex items-center gap-1.5">
+              <CheckIcon size={17} /> Tersalin
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5">
+              <ClipboardIcon size={17} /> Salin
+            </span>
+          )}
         </button>
         <button
           onClick={downloadMarkdown}
           className="px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm flex items-center gap-1"
         >
-          ⬇️ .md
+          <DownloadIcon size={17} /> .md
         </button>
         <button
           onClick={downloadPDF}
           className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-105 transition text-sm flex items-center gap-1 shadow"
         >
-          🖨️ PDF
+          <PrinterIcon size={17} /> PDF
         </button>
       </div>
       <div className="prose prose-lg dark:prose-invert max-w-none print-area">

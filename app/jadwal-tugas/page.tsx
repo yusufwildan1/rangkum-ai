@@ -15,7 +15,7 @@ export default async function JadwalTugasPage() {
   const userId = session.user.id;
 
   const res = await pool.query(
-    `SELECT id, title, "dueDate", done, "createdAt"
+    `SELECT id, title, "dueDate", done, "fileName", content, "createdAt"
        FROM tasks
       WHERE "userId" = $1
       ORDER BY "createdAt" DESC`,
@@ -27,6 +27,8 @@ export default async function JadwalTugasPage() {
     title: r.title,
     dueDate: r.dueDate ?? '',
     done: Boolean(r.done),
+    fileName: r.fileName ?? null,
+    content: r.content ?? null,
   }));
 
   return (

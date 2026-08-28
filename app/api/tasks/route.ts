@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { pool } from '@/lib/db';
+import { extractText } from '@/lib/fileParser';
 
 export const runtime = 'nodejs';
 
@@ -11,15 +12,20 @@ export async function GET() {
   }
   const userId = session.user.id;
   const res = await pool.query(
-    `SELECT id, title, "dueDate", done, "createdAt"
+    `SELECT id, title, "dueDate", done, "fileName", content, "createdAt"
        FROM tasks
       WHERE "userId" = $1
       ORDER BY "createdAt" DESC`,
     [userId]
   );
   const tasks = res.rows.map((r) => ({
-    ...r,
+    id: r.id,
+    title: r.title,
+    dueDate: r.dueDate,
     done: Boolean(r.done),
+    fileName: r.fileName,
+    content: r.content,
+    createdAt: r.createdAt,
   }));
   return NextResponse.json(tasks);
 }
@@ -30,23 +36,53 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const userId = session.user.id;
-  let body: { title?: string; dueDate?: string; done?: boolean };
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ error: 'Bad request' }, { status: 400 });
+
+  let title: string;
+  let dueDate: string | null = null;
+  let fileName: string | null = null;
+  let content: string | null = null;
+
+  const contentType = req.headers.get('content-type') || '';
+  if (contentType.includes('multipart/form-data')) {
+    const form = await req.formData();
+    title = String(form.get('title') ?? '').trim();
+    const dd = String(form.get('dueDate') ?? '');
+    dueDate = dd ? dd : null;
+    const file = form.get('file') as File | null;
+    if (file && file.size > 0) {
+      const text = await extractText(file);
+      fileName = file.name;
+      content = text || null;
+    }
+  } else {
+    let body: { title?: string; dueDate?: string; done?: boolean };
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: 'Bad request' }, { status: 400 });
+    }
+    title = (body.title ?? '').trim();
+    dueDate = body.dueDate ?? null;
   }
-  const title = (body.title ?? '').trim();
+
   if (!title) {
     return NextResponse.json({ error: 'Title is required' }, { status: 400 });
   }
+
   const id = crypto.randomUUID();
   await pool.query(
-    `INSERT INTO tasks (id, "userId", title, "dueDate", done)
-     VALUES ($1, $2, $3, $4, $5)`,
-    [id, userId, title, body.dueDate ?? null, body.done ? true : false]
+    `INSERT INTO tasks (id, "userId", title, "dueDate", done, "fileName", content)
+     VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+    [id, userId, title, dueDate, false, fileName, content]
   );
-  return NextResponse.json({ id, title, dueDate: body.dueDate ?? null, done: body.done ? true : false });
+  return NextResponse.json({
+    id,
+    title,
+    dueDate,
+    done: false,
+    fileName,
+    content,
+  });
 }
 
 export async function PATCH(req: NextRequest) {

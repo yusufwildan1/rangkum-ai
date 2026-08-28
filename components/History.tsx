@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ScrollIcon } from '@/components/icons/NeonIcons';
 
 interface HistoryItem {
   id: string;
@@ -22,8 +23,8 @@ const History: React.FC<Props> = ({ history, onSelect, onClear, onClearAll }) =>
   return (
     <div className="mt-8 p-5 glass rounded-3xl">
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-          📜 Riwayat Rangkuman
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+          <ScrollIcon size={22} /> Riwayat Rangkuman
         </h2>
         <button
           onClick={onClearAll}

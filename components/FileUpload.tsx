@@ -3,6 +3,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { ALLOWED_EXTENSIONS, MAX_FILE_SIZE_MB } from '@/lib/constants';
+import { FolderIcon, InboxIcon } from '@/components/icons/NeonIcons';
 
 interface Props {
   onFileSelect: (file: File) => void;
@@ -45,13 +46,11 @@ const FileUpload: React.FC<Props> = ({ onFileSelect }) => {
     >
       <input {...getInputProps()} />
       <div
-        className={`mx-auto w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-4 transition-all ${
-          isDragActive
-            ? 'bg-blue-500/20 scale-110'
-            : 'bg-gradient-to-br from-blue-500/20 to-purple-500/20'
+        className={`mx-auto neon-icn-badge mb-4 transition-all duration-300 ${
+          isDragActive ? 'scale-110' : ''
         }`}
       >
-        {isDragActive ? '📥' : '📂'}
+        {isDragActive ? <InboxIcon size={42} /> : <FolderIcon size={42} />}
       </div>
       {isDragActive ? (
         <p className="text-blue-600 dark:text-blue-300 font-medium text-lg">

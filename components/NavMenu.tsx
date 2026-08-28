@@ -4,10 +4,18 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import {
+  HomeIcon,
+  InfoIcon,
+  RocketIcon,
+  CalendarIcon,
+  LogoutIcon,
+  LoginIcon,
+} from '@/components/icons/NeonIcons';
 
 interface MenuItem {
   label: string;
-  icon: string;
+  icon: React.ReactNode;
   href: string;
   description?: string;
 }
@@ -17,10 +25,10 @@ interface Props {
 }
 
 const DEFAULT_ITEMS: MenuItem[] = [
-  { label: 'Beranda', icon: '🏠', href: '/' },
-  { label: 'Tentang', icon: 'ℹ️', href: '/about' },
-  { label: 'Rangkum AI', icon: '🚀', href: '/rangkum', description: 'Upload & rangkum dokumen' },
-  { label: 'Jadwal Tugas', icon: '📅', href: '/jadwal-tugas', description: 'Kelola deadline tugas' },
+  { label: 'Beranda', icon: <HomeIcon size={20} />, href: '/' },
+  { label: 'Tentang', icon: <InfoIcon size={20} />, href: '/about' },
+  { label: 'Rangkum AI', icon: <RocketIcon size={20} />, href: '/rangkum', description: 'Upload & rangkum dokumen' },
+  { label: 'Jadwal Tugas', icon: <CalendarIcon size={20} />, href: '/jadwal-tugas', description: 'Kelola deadline tugas' },
 ];
 
 const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
@@ -47,7 +55,7 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-label="Buka menu"
-        className="w-11 h-11 flex items-center justify-center rounded-full bg-white/60 dark:bg-gray-800/70 border border-white/60 dark:border-gray-700/50 shadow-lg text-lg hover:scale-110 transition-all duration-200"
+        className="nk-chip w-11 h-11 flex items-center justify-center rounded-full text-lg hover:scale-110 transition-all duration-200"
       >
         <span className="flex flex-col gap-1.5">
           {/* Ikon hamburger */}
@@ -66,8 +74,8 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 z-30 w-64 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-white/60 dark:border-gray-700/50 shadow-2xl rounded-3xl overflow-hidden p-2">
-          <div className="px-3 pb-2 pt-1 text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500">
+        <div className="nk-menu-panel absolute right-0 mt-2 z-30 w-64 rounded-3xl overflow-hidden p-2 shadow-2xl">
+          <div className="px-3 pb-2 pt-1 text-xs uppercase tracking-wider text-gray-500">
             Menu
           </div>
           <nav className="space-y-1">
@@ -78,25 +86,25 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                 onClick={() => setOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-2xl transition ${
                   isActive(item.href)
-                    ? 'bg-blue-500/15 text-blue-700 dark:text-blue-300'
-                    : 'text-gray-800 dark:text-gray-100 hover:bg-blue-500/10 dark:hover:bg-gray-700/50'
+                    ? 'bg-[--nk-cyan]/15 text-[--nk-cyan]'
+                    : 'hover:bg-white/5'
                 }`}
               >
-                <span className="text-xl">{item.icon}</span>
+                <span className="flex items-center">{item.icon}</span>
                 <span className="flex-1">
                   <span className="block font-medium">{item.label}</span>
                   {item.description && (
-                    <span className="block text-xs text-gray-500 dark:text-gray-400">
+                    <span className="block text-xs text-gray-500">
                       {item.description}
                     </span>
                   )}
                 </span>
-                {isActive(item.href) && <span className="text-blue-500">•</span>}
+                {isActive(item.href) && <span className="text-[--nk-cyan]">•</span>}
               </Link>
             ))}
           </nav>
 
-          <div className="mt-2 pt-2 border-t border-white/40 dark:border-gray-700/40">
+          <div className="mt-2 pt-2 border-t border-[--nk-border]/60">
             {status === 'authenticated' && session?.user ? (
               <div className="px-3 py-2 flex items-center gap-3">
                 {session.user.image ? (
@@ -106,16 +114,16 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                     className="w-9 h-9 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[--nk-cyan] to-[--nk-purple] flex items-center justify-center text-black font-bold">
                     {(session.user.name?.[0] || '?').toUpperCase()}
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate text-gray-800 dark:text-gray-100">
+                  <p className="text-sm font-medium truncate">
                     {session.user.name || 'Pengguna'}
                   </p>
                   {session.user.email && (
-                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                    <p className="text-xs text-gray-500 truncate">
                       {session.user.email}
                     </p>
                   )}
@@ -123,7 +131,7 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
               </div>
             ) : (
               <div className="px-3 py-2 text-sm">
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                <p className="text-gray-500 mb-1">
                   Masuk untuk menyimpan data kamu.
                 </p>
               </div>
@@ -133,16 +141,16 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
               {status === 'authenticated' ? (
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
-                  className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-red-600 dark:text-red-400 hover:bg-red-500/10 transition"
+                  className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-red-400 hover:bg-red-500/10 transition"
                 >
-                  <span>🚪</span> Keluar
+                  <LogoutIcon size={19} /> Keluar
                 </button>
               ) : (
                 <button
                   onClick={() => signIn('google', { callbackUrl: '/rangkum' })}
-                  className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-blue-600 dark:text-blue-300 hover:bg-blue-500/10 transition"
+                  className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-[--nk-cyan] hover:bg-white/5 transition"
                 >
-                  <span>🔐</span> Masuk
+                  <LoginIcon size={19} /> Masuk
                 </button>
               )}
             </div>

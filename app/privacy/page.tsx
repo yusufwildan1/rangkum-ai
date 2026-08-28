@@ -10,14 +10,14 @@ export default function PrivacyPage() {
             🔒 Kebijakan Privasi
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center">
-            Berlaku untuk situs <strong>Rangkum AI</strong> — terakhir diperbarui: Agustus 2026
+            Berlaku untuk situs <strong>J4Students</strong> — terakhir diperbarui: Agustus 2026
           </p>
 
           <div className="space-y-6 leading-relaxed">
             <section>
               <h2 className="text-xl font-semibold mb-2">1. Informasi yang Kami Kumpulkan</h2>
               <p>
-                Saat Anda menggunakan Rangkum AI, kami dapat mengumpulkan data berikut:
+                Saat Anda menggunakan J4Students, kami dapat mengumpulkan data berikut:
               </p>
               <ul className="list-disc list-inside space-y-1 mt-2">
                 <li><strong>Data akun:</strong> nama, alamat email, dan foto profil yang Anda berikan melalui login Google.</li>

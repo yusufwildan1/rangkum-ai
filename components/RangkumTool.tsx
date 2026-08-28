@@ -5,6 +5,7 @@ import FileUpload from '@/components/FileUpload';
 import SummaryOutput from '@/components/SummaryOutput';
 import History from '@/components/History';
 import { PREVIEW_LENGTH } from '@/lib/constants';
+import { RocketIcon, FileIcon, AlertIcon, LoaderIcon } from '@/components/icons/NeonIcons';
 
 export interface HistoryItem {
   id: string;
@@ -104,8 +105,8 @@ export default function RangkumTool({ initialHistory }: Props) {
   return (
     <>
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-300 dark:to-purple-300">
-          🚀 Rangkum AI
+        <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-300 dark:to-purple-300 flex items-center justify-center gap-3">
+          <RocketIcon size={34} /> Rangkum AI
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
           Upload file, dapatkan rangkuman lengkap dengan glosarium, tips, dan action items!
@@ -117,7 +118,7 @@ export default function RangkumTool({ initialHistory }: Props) {
       {file && rawText && (
         <div className="mt-4 p-4 glass-soft rounded-2xl">
           <p className="text-sm text-gray-700 dark:text-gray-200 break-all">
-            <strong>📎 {fileName}</strong>
+            <FileIcon size={16} className="inline align-[-2px] mr-1" /> <strong>{fileName}</strong>
             <span className="text-gray-500 dark:text-gray-400">
               {' '}({rawText.length.toLocaleString('id-ID')} karakter)
             </span>
@@ -130,7 +131,7 @@ export default function RangkumTool({ initialHistory }: Props) {
 
       {error && (
         <div className="mt-4 p-3 glass-soft rounded-xl border-red-300/40 text-red-600 dark:text-red-400 text-sm">
-          ⚠️ {error}
+          <AlertIcon size={18} className="inline align-[-3px] mr-1.5" /> {error}
         </div>
       )}
 
@@ -140,7 +141,15 @@ export default function RangkumTool({ initialHistory }: Props) {
           disabled={loading || !rawText}
           className="px-10 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium disabled:opacity-40 hover:scale-[1.02] hover:shadow-blue-500/30 transition-all duration-300 text-lg shadow-2xl"
         >
-          {loading ? '⏳ Merangkum...' : '🚀 Rangkum Sekarang'}
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <LoaderIcon size={22} className="animate-spin" /> Merangkum...
+            </span>
+          ) : (
+            <span className="flex items-center gap-2">
+              <RocketIcon size={22} /> Rangkum Sekarang
+            </span>
+          )}
         </button>
       </div>
 
