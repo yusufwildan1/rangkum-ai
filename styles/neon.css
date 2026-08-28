@@ -324,6 +324,16 @@ body.nk-body::after {
 @keyframes taskCheck { 0%, 20% { background: transparent; } 50%, 100% { background: var(--neon-green); box-shadow: 0 0 10px rgba(57, 255, 176, 0.8); } }
 @keyframes taskDim { 0%, 20% { opacity: 1; text-decoration: none; } 50%, 100% { opacity: 0.55; text-decoration: line-through; } }
 
+/* Mock hasil generate Rangkum AI (kartu J4Students) */
+.j4-ai-bar { margin: 2px 0 8px; }
+.j4-ai-bar-label { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; color: var(--neon-cyan); text-shadow: 0 0 8px rgba(34, 224, 255, 0.5); }
+.j4-ai-bar-track { height: 6px; margin-top: 5px; border-radius: 999px; background: rgba(255, 255, 255, 0.09); border: 1px solid var(--card-border); overflow: hidden; }
+.j4-ai-bar-fill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green)); box-shadow: 0 0 10px var(--pc-glow); animation: ai-load 3s ease-in-out infinite; }
+@keyframes ai-load { 0% { width: 0; } 45% { width: 92%; } 100% { width: 92%; opacity: 0.6; } }
+.j4-summary { flex: 1; display: flex; align-items: flex-start; border-left: 2px solid var(--neon-cyan); padding-left: 10px; margin: 2px 0; }
+.j4-summary-line { font-family: var(--mono); font-size: 0.8rem; line-height: 1.5; color: var(--ink); }
+.j4-w { display: inline; }
+
 /* ---------- Contact ---------- */
 .contact-card { background: radial-gradient(circle at 15% 20%, rgba(34, 224, 255, 0.15), transparent 40%), radial-gradient(circle at 85% 80%, rgba(255, 79, 216, 0.15), transparent 40%), var(--card-bg); border: 1px solid var(--card-border); border-radius: 34px; box-shadow: 0 0 50px rgba(0, 0, 0, 0.6); backdrop-filter: blur(14px); padding: 56px 32px; text-align: center; position: relative; overflow: hidden; }
 .contact-big { font-family: var(--display); font-weight: 900; font-size: clamp(1.8rem, 5vw, 3rem); letter-spacing: -1px; line-height: 1.08; color: var(--ink); }

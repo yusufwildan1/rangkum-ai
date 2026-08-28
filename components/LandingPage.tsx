@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 // ===== count-up untuk stats (dari portfolio asli) =====
 function useCountUp(end: number, ref: React.RefObject<HTMLDivElement>, duration = 1400) {
@@ -103,26 +104,39 @@ function SkillIcon({ icon, color, glow }: { icon: string; color: string; glow: s
 }
 
 // ===== mock preview proyek (dari portfolio asli) =====
-const upTasks = ['Materi Akuntansi', 'Latihan Soal', 'Jadwal Kuliah'];
 
 function ProjectArtJ4() {
+  const summaryWords = ['Rangkuman', 'AI', 'mengubah', 'dokumen', 'menjadi', 'catatan', 'ringkas', '&', 'terstruktur', 'untuk', 'dipelajari.'];
   return (
     <div className="j4-app">
       <div className="j4-top">
         <span className="j4-dot"></span>
-        <span className="j4-name">J4Students</span>
+        <span className="j4-name">Rangkum AI</span>
         <span className="j4-live">● live</span>
       </div>
-      <div className="j4-heading">Tugas Hari Ini</div>
-      {upTasks.map((t) => (
-        <div className="j4-task" key={t}>
-          <span className="j4-check"></span>
-          <span className="j4-task-label">{t}</span>
-        </div>
-      ))}
+      <div className="j4-ai-bar">
+        <span className="j4-ai-bar-label">✨ Merangkum dokumen...</span>
+        <div className="j4-ai-bar-track"><span className="j4-ai-bar-fill"></span></div>
+      </div>
+      <div className="j4-summary">
+        <p className="j4-summary-line">
+          {summaryWords.map((w, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 5, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.3, delay: 0.4 + i * 0.14 }}
+              className="j4-w"
+            >
+              {w}{' '}
+            </motion.span>
+          ))}
+        </p>
+      </div>
       <div className="j4-progress">
         <div className="j4-progress-fill">
-          <span className="j4-progress-label">Belajar 68%</span>
+          <span className="j4-progress-label">Rangkuman 68%</span>
         </div>
       </div>
     </div>
