@@ -277,7 +277,7 @@ export default function LandingPage() {
                 ide menjadi pengalaman digital yang ceria, berkarakter, dan tak terlupakan.
               </p>
               <div className="hero-actions">
-                <a href="#karya" className="btn-fill">Lihat karyaku <span>↓</span></a>
+                <a href="#karya" className="btn-fill">See my work <span>↓</span></a>
                 <a href="#kontak" className="btn-line">Say hi <span>→</span></a>
               </div>
             </div>
@@ -392,6 +392,11 @@ export default function LandingPage() {
         <div className="footer">
           <span>© 2026 Zyn</span>
           <span className="footer-heart">dibuat dengan ♥ &amp; banyak kopi</span>
+          <nav className="footer-links" aria-label="Footer">
+            <a href="/privacy">Privasi</a>
+            <span className="footer-links-sep">·</span>
+            <a href="/terms">Syarat &amp; Ketentuan</a>
+          </nav>
           <a href="#beranda" className="footer-top">ke atas ↑</a>
         </div>
       </footer>

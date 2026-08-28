@@ -325,6 +325,10 @@ body.nk-body::after {
 /* ---------- Footer ---------- */
 .footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 20px 0 32px; border-top: 1px solid rgba(120, 160, 255, 0.15); font-weight: 700; color: var(--ink-soft); }
 .footer-heart { font-family: var(--hand); font-size: 1.4rem; color: var(--neon-pink); text-shadow: 0 0 14px rgba(255, 79, 216, 0.5); }
+.footer-links { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.footer-links a { color: var(--ink-soft); text-decoration: none; font-weight: 700; transition: color 0.2s, text-shadow 0.2s; }
+.footer-links a:hover { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(34, 224, 255, 0.5); }
+.footer-links-sep { color: rgba(120, 160, 255, 0.4); }
 .footer-top { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--ink); padding: 8px 14px; border-radius: 999px; transition: border-color 0.2s; text-decoration: none; }
 .footer-top:hover { border-color: var(--neon-cyan); }
 
