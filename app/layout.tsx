@@ -8,7 +8,7 @@ import Provider from '@/components/Provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'J4Students — Tools Belajar Mahasiswa',
+  title: 'Student Lab',
   description: 'Rangkum dokumen dengan AI & kelola jadwal tugas — PDF, DOCX, TXT, Markdown',
 };
 
