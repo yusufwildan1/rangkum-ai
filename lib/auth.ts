@@ -23,5 +23,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return session;
     },
+    signIn({ user }) {
+      const email = user?.email;
+      if (!email) return false;
+
+      const allowed = (process.env.ALLOWED_EMAILS || '')
+        .split(',')
+        .map((e) => e.trim().toLowerCase())
+        .filter(Boolean);
+      return allowed.includes(email.toLowerCase());
+    },
   },
 });
