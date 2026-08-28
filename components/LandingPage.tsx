@@ -377,8 +377,8 @@ export default function LandingPage() {
               Punya ide seru? <br />
               Ayo wujudkan <span className="u-underline">bersama.</span>
             </p>
-            <a href="mailto:yuwiaffa@gmail.com" className="btn-fill email-btn">
-              yuwiaffa@gmail.com <span>↗</span>
+            <a href="mailto:zyn@gmail.com" className="btn-fill email-btn">
+              zyn@gmail.com <span>↗</span>
             </a>
             <div className="socials">
               <a href="#" className="soc">GitHub</a>

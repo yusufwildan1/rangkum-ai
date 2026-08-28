@@ -81,8 +81,8 @@ export default function PrivacyPage() {
               <p>
                 Jika Anda memiliki pertanyaan mengenai kebijakan privasi ini, silakan
                 hubungi kami di:{' '}
-                <a href="mailto:yuwiaffa@gmail.com" className="text-blue-600 dark:text-blue-400 underline">
-                  yuwiaffa@gmail.com
+                <a href="mailto:zyn@gmail.com" className="text-blue-600 dark:text-blue-400 underline">
+                  zyn@gmail.com
                 </a>
               </p>
             </section>

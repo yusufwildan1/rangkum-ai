@@ -71,6 +71,14 @@
     width: 100%;
   }
 
+  /* Paksa kata hasil animasi typing tampil penuh saat mencetak (hindari blur/transparan) */
+  body.printing-summary .print-area * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
   /* Terapkan ukuran kertas sesuai pilihan pada elemen html */
   html.page-a5 { @page { size: A5; margin: 12mm; } }
   html.page-b5 { @page { size: B5; margin: 12mm; } }

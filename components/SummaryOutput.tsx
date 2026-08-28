@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { motion } from 'framer-motion';
 import 'katex/dist/katex.min.css';
 import {
   FileIcon,
@@ -31,6 +32,34 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
   const [paperSize, setPaperSize] = React.useState('a4');
   const [open, setOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement | null>(null);
+  const typingSeq = React.useRef(0);
+
+  React.useEffect(() => {
+    typingSeq.current = 0;
+  }, [summary]);
+
+  const TypingWords = ({ text }: { text: string }) => {
+    const words = text.split(' ');
+    return (
+      <>
+        {words.map((word, i) => (
+          <motion.span
+            key={i}
+            initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.18, delay: (typingSeq.current + i) * 0.035 }}
+            className="inline-block whitespace-pre"
+          >
+            {word}
+          </motion.span>
+        ))}
+      </>
+    );
+  };
+
+  const stepTyping = (count: number) => {
+    typingSeq.current += count;
+  };
 
   React.useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -156,7 +185,35 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
           remarkPlugins={[remarkGfm, remarkMath]}
           rehypePlugins={[rehypeKatex]}
           components={{
+            p({ children }) {
+              if (typeof children === 'string') {
+                const count = children.split(' ').length;
+                const words = <TypingWords text={children} />;
+                stepTyping(count);
+                return <p>{words}</p>;
+              }
+              return <p>{children}</p>;
+            },
+            li({ children }) {
+              if (typeof children === 'string') {
+                const count = children.split(' ').length;
+                const words = <TypingWords text={children} />;
+                stepTyping(count);
+                return <li>{words}</li>;
+              }
+              return <li>{children}</li>;
+            },
             h1({ children }) {
+              if (typeof children === 'string') {
+                const count = children.split(' ').length;
+                const words = <TypingWords text={children} />;
+                stepTyping(count);
+                return (
+                  <h1 className="border-b border-gray-200 dark:border-gray-700 pb-2">
+                    {words}
+                  </h1>
+                );
+              }
               return (
                 <h1 className="border-b border-gray-200 dark:border-gray-700 pb-2">
                   {children}
