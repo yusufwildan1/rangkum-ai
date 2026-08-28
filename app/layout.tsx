@@ -10,6 +10,12 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Student Lab',
   description: 'Rangkum dokumen dengan AI & kelola jadwal tugas — PDF, DOCX, TXT, Markdown',
+  icons: {
+    icon: [
+      { url: '/icon-light.svg', rel: 'icon', media: '(prefers-color-scheme: light)' },
+      { url: '/icon-dark.svg', rel: 'icon', media: '(prefers-color-scheme: dark)' },
+    ],
+  },
 };
 
 export default function RootLayout({
