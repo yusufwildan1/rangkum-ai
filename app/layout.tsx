@@ -11,10 +11,7 @@ export const metadata: Metadata = {
   title: 'Student Lab',
   description: 'Rangkum dokumen dengan AI & kelola jadwal tugas — PDF, DOCX, TXT, Markdown',
   icons: {
-    icon: [
-      { url: '/icon-light.svg?v=2', rel: 'icon', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark.svg?v=2', rel: 'icon', media: '(prefers-color-scheme: dark)' },
-    ],
+    icon: '/icon-dark.svg?v=3',
   },
 };
 
