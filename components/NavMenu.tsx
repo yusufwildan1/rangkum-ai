@@ -100,10 +100,10 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-2xl transition ${
+                    className={`flex items-center gap-3 px-3 py-2.5 border-2 transition ${
                       isActive(item.href)
-                        ? 'bg-[--nk-cyan]/15 text-[--nk-cyan]'
-                        : 'hover:bg-white/5'
+                        ? 'bg-[#f5a623] border-[#7a4a12] text-[#3b2004] shadow-[3px_3px_0_0_#7a4a12]'
+                        : 'border-transparent hover:bg-[#ffd58a] hover:border-[#a0651a] hover:text-[#3b2004] hover:shadow-[3px_3px_0_0_#a0651a]'
                     }`}
                   >
                     <span className="flex items-center">{item.icon}</span>
@@ -115,7 +115,7 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                         </span>
                       )}
                     </span>
-                    {isActive(item.href) && <span className="text-[--nk-cyan]">•</span>}
+                    {isActive(item.href) && <span className="text-[#3b2004]">●</span>}
                   </Link>
                 </motion.div>
               ))}
@@ -163,14 +163,14 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                 {status === 'authenticated' ? (
                   <button
                     onClick={() => signOut({ callbackUrl: '/' })}
-                    className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-red-400 hover:bg-red-500/10 transition"
+                    className="w-full flex items-center gap-2 px-3 py-2 border-2 border-transparent text-left text-red-400 hover:bg-[#ff5f7a] hover:text-black hover:border-black hover:shadow-[3px_3px_0_0_#000] transition"
                   >
                     <LogoutIcon size={19} /> Keluar
                   </button>
                 ) : (
                   <button
                     onClick={() => signIn('google', { callbackUrl: '/rangkum' })}
-                    className="w-full flex items-center gap-2 px-3 py-2 rounded-2xl text-left text-[--nk-cyan] hover:bg-white/5 transition"
+                    className="w-full flex items-center gap-2 px-3 py-2 border-2 border-transparent text-left text-[#ffd58a] hover:bg-[#ffd58a] hover:text-[#3b2004] hover:border-[#a0651a] hover:shadow-[3px_3px_0_0_#a0651a] transition"
                   >
                     <LoginIcon size={19} /> Masuk
                   </button>

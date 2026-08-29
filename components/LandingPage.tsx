@@ -303,12 +303,6 @@ export default function LandingPage() {
 
   return (
     <div className="j4-app-root relative">
-      {/* ambient blobs */}
-      <span className="blob blob-top-left"></span>
-      <span className="blob blob-top-right"></span>
-      <span className="blob blob-bottom-left"></span>
-      <span className="blob blob-bottom-right"></span>
-
       <div className="nk-container">
         {/* Topbar portfolio asli (sejajar dengan konten, seperti default portfolio) */}
         <header className="topbar">
@@ -339,7 +333,7 @@ export default function LandingPage() {
                 <span className="hing">kode yang</span>{' '}
                 <span className="rot">berbicara.</span>
               </h1>
-              <p className="hero-note">pecut ai semaksimal mungkin</p>
+              <p className="hero-note text-[4.5rem] leading-none">pecut ai semaksimal mungkin</p>
             </div>
 
             <div className="hero-bottom">

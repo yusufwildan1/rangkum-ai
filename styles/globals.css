@@ -6,6 +6,16 @@
   html {
     @apply scroll-smooth;
   }
+
+  /* Agar tampilan di zoom 100% setara seperti zoom 140% sebelumnya,
+     perbesar seluruh halaman secara proporsional pada layar besar.
+     Layar kecil (<1024px) tetap normal agar responsive di HP/tablet. */
+  @media (min-width: 1024px) {
+    html { zoom: 1.4; }
+  }
+  @media (min-width: 1536px) {
+    html { zoom: 1.45; }
+  }
 }
 
 @layer utilities {
@@ -17,11 +27,11 @@
   }
 
   .glass {
-    @apply bg-white/20 dark:bg-gray-800/30 backdrop-blur-xl border border-white/40 dark:border-gray-700/30 shadow-2xl;
+    @apply bg-[#1b1e26] border-[3px] border-black shadow-[6px_6px_0_0_#000];
   }
 
   .glass-soft {
-    @apply bg-white/15 dark:bg-gray-800/25 backdrop-blur-md border border-white/30 dark:border-gray-700/30 shadow-xl;
+    @apply bg-white/5 border-2 border-black shadow-[4px_4px_0_0_#000];
   }
 }
 

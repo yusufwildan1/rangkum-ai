@@ -32,7 +32,7 @@ const NeonIcon: React.FC<{
       <defs>
         <linearGradient id={id} x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#22e0ff" />
-          <stop offset="50%" stopColor="#a78bff" />
+          <stop offset="50%" stopColor="#ffe14d" />
           <stop offset="100%" stopColor="#ff4fd8" />
         </linearGradient>
       </defs>

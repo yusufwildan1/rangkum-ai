@@ -171,7 +171,7 @@ export default function RangkumTool({ initialHistory }: Props) {
         <button
           onClick={handleSummarize}
           disabled={loading || !rawText}
-          className="px-10 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium disabled:opacity-40 hover:scale-[1.02] hover:shadow-blue-500/30 transition-all duration-300 text-lg shadow-2xl"
+          className="btn-fill text-lg px-10 py-4 disabled:opacity-40 disabled:hover:transform-none disabled:hover:shadow-[5px_5px_0_0_#000]"
         >
           {loading ? (
             <span className="flex items-center gap-2">

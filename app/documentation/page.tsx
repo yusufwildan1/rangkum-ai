@@ -43,12 +43,12 @@ export default function DocumentationPage() {
               <Link
                 key={d.title}
                 href={d.href}
-                className="glass doc-index-card rounded-3xl p-6 hover:scale-[1.02] transition-all duration-300 block"
+                className="glass doc-index-card p-6 hover:translate-x-[-3px] hover:translate-y-[-3px] transition-all duration-150 block"
                 style={{ ['--dc' as string]: d.color, ['--dg' as string]: d.glow } as React.CSSProperties}
               >
                 <div
-                  className="mb-4 w-16 h-16 rounded-2xl flex items-center justify-center ring-1 ring-white/15 doc-index-icon"
-                  style={{ background: `radial-gradient(circle at 30% 30%, ${d.glow}, transparent 70%)` }}
+                  className="mb-4 w-16 h-16 flex items-center justify-center doc-index-icon"
+                  style={{ background: '#23262f', border: '3px solid #000', boxShadow: '4px 4px 0 0 #000' }}
                 >
                   {d.icon}
                 </div>

@@ -5,6 +5,8 @@ import '../styles/neon.css';
 import { ThemeProvider } from 'next-themes';
 import Provider from '@/components/Provider';
 import PageTransition from '@/components/PageTransition';
+import BruteGrid from '@/components/BruteGrid';
+import BlobBackdrop from '@/components/BlobBackdrop';
 import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -35,6 +37,8 @@ export default function RootLayout({
       <body className={`${inter.className} nk-body min-h-screen text-gray-100 transition-colors`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Provider>
+            <BruteGrid />
+            <BlobBackdrop />
             <PageTransition>{children}</PageTransition>
           </Provider>
         </ThemeProvider>

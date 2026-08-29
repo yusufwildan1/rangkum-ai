@@ -234,16 +234,12 @@ export default function JadwalTugas({ initialTasks }: Props) {
 
   return (
     <>
-      <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3 flex items-center justify-center gap-3">
-          <CalendarIcon size={34} />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-300 dark:to-purple-300">
-            Jadwal Tugas
-          </span>
+      <div className="text-center mb-10">
+        <h1 className="hero-title">
+          <span className="swash"><span className="squiggle">Jadwal</span></span>{' '}
+          <span className="rot">Tugas</span>
         </h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Catat tugas, lampirkan file PDF/TXT, dan pantau deadline agar tidak ada yang terlewat.
-        </p>
+        <p className="hero-note mt-4">catat &amp; pantau deadline tugasmu</p>
       </div>
 
       <div className="glass rounded-3xl p-5 mb-6 pr-5">
@@ -254,14 +250,14 @@ export default function JadwalTugas({ initialTasks }: Props) {
             onChange={(e) => setTitle(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && addTask()}
             placeholder="Nama tugas..."
-            className="flex-1 min-w-[8rem] px-5 py-3 rounded-full bg-[--card-bg] border border-[--card-border] text-[--ink] placeholder-[--ink-soft] focus:outline-none focus:ring-2 focus:ring-[--neon-cyan]/60 transition"
+            className="flex-1 min-w-[8rem] px-5 py-3 bg-[--card-bg] border-2 border-[--card-border] text-[--ink] placeholder-[--ink-soft] focus:outline-none focus:border-[--neon-cyan] focus:shadow-[3px_3px_0_0_var(--neon-cyan)] transition"
           />
           <button
             type="button"
             onClick={openPicker}
             aria-label="Pilih tanggal"
             title={dueDate ? `Ubah tanggal: ${formatDateShort(dueDate)}` : 'Pilih tanggal'}
-            className="nk-btn-anim nk-btn-glow-cyan shrink-0 flex items-center gap-2 px-3 py-2.5 rounded-full bg-[--card-bg] border border-[--card-border] text-[--neon-cyan] hover:text-[--neon-pink] hover:border-[--neon-pink]/60 transition shadow-[0_0_16px_rgba(34,224,255,0.25)]"
+            className="nk-btn-anim shrink-0 flex items-center gap-2 px-3 py-2.5 bg-[#2a2d37] border-2 border-[#000] text-[--ink-soft] hover:text-[#3b2004] hover:bg-[#ffd58a] hover:border-[#a0651a] hover:shadow-[3px_3px_0_0_#a0651a] transition"
           >
             <CalendarIcon size={22} className="shrink-0" />
             {dueDate && (
@@ -290,7 +286,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
           </label>
           <button
             onClick={addTask}
-            className="nk-btn-anim ml-auto shrink-0 flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[--neon-cyan] to-[--neon-pink] text-[#05070c] font-extrabold hover:from-[--neon-green] hover:to-[--neon-cyan] transition shadow-[0_0_24px_rgba(34,224,255,0.4)]"
+            className="btn-fill ml-auto shrink-0 flex items-center justify-center gap-2 px-6 py-3 font-extrabold"
           >
             <PlusIcon size={18} /> Tambah
           </button>
