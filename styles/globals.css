@@ -6,16 +6,6 @@
   html {
     @apply scroll-smooth;
   }
-
-  /* Agar tampilan di zoom 100% setara seperti zoom 140% sebelumnya,
-     perbesar seluruh halaman secara proporsional pada layar besar.
-     Layar kecil (<1024px) tetap normal agar responsive di HP/tablet. */
-  @media (min-width: 1024px) {
-    html { zoom: 1.4; }
-  }
-  @media (min-width: 1536px) {
-    html { zoom: 1.45; }
-  }
 }
 
 @layer utilities {
