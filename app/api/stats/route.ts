@@ -8,8 +8,8 @@ export async function GET() {
     const res = await pool.query('SELECT "total_visits" FROM "site_stats" WHERE "id" = $1', ['site']);
     const totalVisits = Number(res.rows[0]?.total_visits ?? 0);
     return NextResponse.json({ totalVisits });
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : 'unknown';
-    return NextResponse.json({ error: msg }, { status: 500 });
+  } catch (error) {
+    console.error('Stats error:', error);
+    return NextResponse.json({ error: 'Statistik tidak tersedia saat ini.' }, { status: 500 });
   }
 }

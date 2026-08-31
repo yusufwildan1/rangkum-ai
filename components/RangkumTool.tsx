@@ -115,15 +115,15 @@ export default function RangkumTool({ initialHistory }: Props) {
 
       <FileUpload onFileSelect={handleFileChange} />
 
-      <div className="mt-4 flex flex-col sm:flex-row items-start gap-3 p-4 glass-soft rounded-2xl text-sm text-gray-600 dark:text-gray-300">
-        <span className="shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-500 dark:text-blue-300">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <div className="mt-4 flex flex-col sm:flex-row items-start gap-3 p-4 glass-soft text-sm">
+        <span className="shrink-0 flex items-center justify-center w-9 h-9 bg-[#FFD100] border-2 border-[--ink] text-[--ink]">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 16v-4M12 8h.01" />
           </svg>
         </span>
         <p className="leading-relaxed">
-          <strong className="text-gray-800 dark:text-gray-100">Batas file:</strong> dokumen maksimal{' '}
+          <strong>Batas file:</strong> dokumen maksimal{' '}
           <b>{MAX_FILE_SIZE_MB}MB</b> dan teks maksimal 12.000 karakter. Kalau file-mu lebih besar,
           kompres dulu ukurannya sebelum di-upload — coba rekomendasi berikut:
           <span className="inline-flex flex-wrap gap-2 mt-2">
@@ -131,7 +131,7 @@ export default function RangkumTool({ initialHistory }: Props) {
               href="https://www.ilovepdf.com/compress_pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1 rounded-full border border-blue-400/40 text-blue-600 dark:text-blue-300 hover:bg-blue-500/10 transition-all"
+              className="px-3 py-1 glass-soft text-sm font-bold uppercase tracking-wide hover:bg-[#FFD100] transition"
             >
               Kompres PDF (iLovePDF)
             </a>
@@ -139,7 +139,7 @@ export default function RangkumTool({ initialHistory }: Props) {
               href="https://smallpdf.com/compress-pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1 rounded-full border border-purple-400/40 text-purple-600 dark:text-purple-300 hover:bg-purple-500/10 transition-all"
+              className="px-3 py-1 glass-soft text-sm font-bold uppercase tracking-wide hover:bg-[#FFD100] transition"
             >
               Kompres PDF (Smallpdf)
             </a>
@@ -148,21 +148,21 @@ export default function RangkumTool({ initialHistory }: Props) {
       </div>
 
       {file && rawText && (
-        <div className="mt-4 p-4 glass-soft rounded-2xl">
-          <p className="text-sm text-gray-700 dark:text-gray-200 break-all">
+        <div className="mt-4 p-4 glass-soft">
+          <p className="text-[--ink] break-all">
             <FileIcon size={16} className="inline align-[-2px] mr-1" /> <strong>{fileName}</strong>
-            <span className="text-gray-500 dark:text-gray-400">
+            <span className="text-[--ink-soft]">
               {' '}({rawText.length.toLocaleString('id-ID')} karakter)
             </span>
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+          <p className="text-sm mt-2">
             <strong>Cuplikan teks:</strong> {rawText.slice(0, PREVIEW_LENGTH)}...
           </p>
         </div>
       )}
 
       {error && (
-        <div className="mt-4 p-3 glass-soft rounded-xl border-red-300/40 text-red-600 dark:text-red-400 text-sm">
+        <div className="mt-4 p-3 glass-soft border-2 border-[#E8352B] text-[#E8352B] text-sm">
           <AlertIcon size={18} className="inline align-[-3px] mr-1.5" /> {error}
         </div>
       )}
@@ -187,10 +187,10 @@ export default function RangkumTool({ initialHistory }: Props) {
 
       {loading && (
         <div className="mt-6 flex flex-col items-center gap-3">
-          <div className="w-full max-w-md h-2 bg-gray-200/60 dark:bg-gray-700/60 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse w-full"></div>
+          <div className="w-full max-w-md h-3 bg-[#E4D8BE] border-2 border-[--ink] overflow-hidden">
+            <div className="h-full bg-[#FFD100] animate-pulse w-full"></div>
           </div>
-          <p className="text-blue-500">Sedang merangkum dokumen... mohon tunggu</p>
+          <p className="font-bold uppercase tracking-wide">Sedang merangkum dokumen... mohon tunggu</p>
         </div>
       )}
 

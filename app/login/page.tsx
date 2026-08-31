@@ -27,19 +27,19 @@ export default function LoginPage() {
     <>
       <Header />
       <main className="min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md glass rounded-3xl p-8 text-center">
-          <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-2xl flex items-center justify-center text-3xl">
+        <div className="w-full max-w-md glass p-8 text-center">
+          <div className="mx-auto mb-6 w-16 h-16 bg-[#2F49FF] border-[3px] border-[--ink] shadow-[4px_4px_0_0_#15161B] flex items-center justify-center text-3xl text-white">
             🔐
           </div>
           <h1 className="text-2xl font-bold mb-2">Masuk</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
+          <p className="mb-8">
             Masuk untuk menyimpan riwayat rangkuman dan jadwal tugas kamu secara aman.
           </p>
 
           <button
             onClick={handleGoogle}
             disabled={loading || status === 'loading'}
-            className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-white/60 dark:border-gray-700/50 shadow-lg hover:scale-[1.02] transition disabled:opacity-50 font-medium"
+            className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-[#EFE6D3] text-[#15161B] border-2 border-[#15161B] shadow-[6px_6px_0_0_#15161B] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0_0_#15161B] transition disabled:opacity-50 font-bold font-mono"
           >
             <svg width="20" height="20" viewBox="0 0 48 48">
               <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.4 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z" />
@@ -51,7 +51,7 @@ export default function LoginPage() {
           </button>
 
           {status === 'authenticated' && (
-            <p className="mt-4 text-sm text-green-600 dark:text-green-400">
+            <p className="mt-4 text-sm text-[#00C389] font-bold">
               Berhasil masuk! Mengarahkan...
             </p>
           )}

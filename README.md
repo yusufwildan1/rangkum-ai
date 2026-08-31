@@ -1,86 +1,56 @@
-# 📄 Perangkum Dokumen AI
+# StudentLab
 
-Website perangkum dokumen otomatis berbasis **Next.js 14 (App Router)** + **Tailwind CSS** yang mengekstrak teks dari file (PDF, DOCX, TXT, Markdown) lalu merangkumnya menggunakan **OpenAI API** dengan prompt perangkuman bawaan yang sudah lengkap.
+StudentLab adalah aplikasi web untuk dua kebutuhan kuliah yang sudah tersedia:
 
-Pengguna cukup meng-upload file dan klik **Rangkum** — tanpa perlu menulis prompt apa pun.
+- **Rangkum AI** — ekstrak teks dari PDF, DOCX, TXT, atau Markdown dan buat rangkuman Markdown terstruktur.
+- **Jadwal Tugas** — catat deadline, tandai tugas selesai, dan simpan lampiran materi sebagai teks.
+- **Testimoni pengguna** — pengguna dapat mengirim pengalaman mereka; hanya kiriman yang telah disetujui admin yang tampil di beranda.
 
-## ✨ Fitur
+## Status akses
 
-- **Upload file** — Drag & drop atau klik, support PDF, DOCX, TXT, MD, dengan validasi ekstensi di client & server.
-- **Preview teks** — Menampilkan cuplikan 300 karakter pertama dari file yang diekstrak.
-- **Merangkum dengan AI** — Prompt perangkuman akademik bawaan (Executive Summary, Key Takeaways, Glosarium, Tips, Action Items, dll).
-- **Output Markdown lengkap** — Bold, italik, emoji, tabel, heading hierarkis. Dirender dengan `react-markdown` + `remark-gfm`.
-- **Salin & Unduh** — Copy ke clipboard atau download sebagai file `.md`.
-- **Riwayat** — Disimpan di `localStorage`, bisa dipilih kembali atau dihapus per item / semua.
-- **Responsive** — Mobile, tablet, desktop.
-- **Dark Mode** — Toggle terang/gelap dengan `next-themes`.
+Aplikasi menggunakan Google Sign-In. Secara bawaan setiap akun Google dapat masuk. Isi `ALLOWED_EMAILS` hanya bila Anda ingin membatasi akses ke daftar email tertentu. Admin moderasi testimoni ditentukan melalui `ADMIN_EMAILS`.
 
-## 📁 Struktur
+## Menjalankan secara lokal
 
+1. Instal dependensi: `npm install`
+2. Buat `.env.local` dan isi konfigurasi berikut:
+
+```env
+DATABASE_URL=postgresql://...
+AUTH_SECRET=...
+AUTH_GOOGLE_ID=...
+AUTH_GOOGLE_SECRET=...
+# Opsional: batasi akses aplikasi
+# ALLOWED_EMAILS=email1@example.com,email2@example.com
+# Wajib untuk membuka halaman moderasi /admin/testimonials
+ADMIN_EMAILS=admin@example.com
+
+# Pilih satu provider AI
+AI_PROVIDER=openai
+OPENAI_API_KEY=...
+# OPENAI_MODEL=gpt-4o-mini
+
+# atau
+# AI_PROVIDER=gemini
+# GEMINI_API_KEY=...
+# GEMINI_MODEL=gemini-2.0-flash
 ```
-app/
-├── api/summarize/route.ts   # API endpoint (prompt bawaan + OpenAI)
-├── page.tsx                 # Halaman utama
-└── layout.tsx               # Layout global + ThemeProvider
-components/
-├── FileUpload.tsx           # Upload drag & drop
-├── SummaryOutput.tsx        # Render markdown + copy/download
-├── Header.tsx               # Header + toggle dark mode
-└── History.tsx              # Riwayat rangkuman
-lib/
-├── fileParser.ts            # Ekstrak teks PDF/DOCX/TXT/MD
-└── constants.ts             # Batasan & daftar ekstensi
-styles/globals.css
+
+3. Jalankan [schema.sql](./schema.sql) pada database PostgreSQL/Neon.
+4. Jalankan `npm run dev`, kemudian buka `http://localhost:3000`.
+
+## Pemeriksaan produksi
+
+```bash
+npm run build
+npm start
 ```
 
-## 🚀 Instalasi & Menjalankan
+## Batasan dan keamanan
 
-1. **Clone / buka folder project**
+- Upload divalidasi di server untuk ekstensi dan ukuran file; batas bawaan adalah 4 MB.
+- Endpoint yang membuat data dan endpoint AI memiliki rate limit in-memory per akun. Untuk deployment dengan beberapa instance, ganti penyimpanan in-memory di `lib/rateLimit.ts` dengan penyimpanan bersama seperti Redis atau Vercel KV.
+- Kunci AI dan kredensial autentikasi hanya disimpan di environment variable server.
+- Error internal dicatat di server; pesan yang dikirim ke pengguna dibuat umum.
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Siapkan environment variable**
-   ```bash
-   cp .env.example .env.local
-   ```
-   Lalu isi key sesuai provider yang dipakai:
-   - **OpenAI**: set `AI_PROVIDER=openai` dan isi `OPENAI_API_KEY=sk-...`
-   - **Gemini (Google)**: set `AI_PROVIDER=gemini` dan isi `GEMINI_API_KEY=AIza...` (ambil dari https://aistudio.google.com/apikey)
-
-   Kamu bisa bebas pindah provider tinggal ubah `AI_PROVIDER` dan key yang sesuai.
-
-4. **Jalankan development server**
-   ```bash
-   npm run dev
-   ```
-   Buka **http://localhost:3000**
-
-5. **Build & production**
-   ```bash
-   npm run build
-   npm start
-   ```
-
-## 🧪 Cara Menguji
-
-1. Siapkan file uji (PDF, DOCX, TXT, atau MD).
-2. Di halaman utama, seret file ke kotak upload (atau klik untuk memilih).
-3. Pastikan cuplikan teks muncul.
-4. Klik **🚀 Rangkum Sekarang**.
-5. Tunggu loading selesai, lalu hasil rangkuman Markdown tampil lengkap.
-6. Uji tombol **Salin**, **Download .md**, dan cek **Riwayat**.
-
-## 🔐 Catatan Keamanan
-
-- API key hanya disimpan di environment variable server (`OPENAI_API_KEY`), **tidak pernah** di kode client.
-- Validasi format file dilakukan di client dan server.
-- Output dirender dengan `react-markdown` (bukan `dangerouslySetInnerHTML`).
-
-## ☁️ Deployment di Vercel
-
-1. Push project ke GitHub.
-2. Import di Vercel, isi environment variable `OPENAI_API_KEY` di dashboard.
-3. Deploy. `pdf-parse` & `mammoth` berjalan dengan Node.js runtime default.
+Fitur seperti flashcard, sitasi, timer fokus, dan laporan mingguan belum tersedia dan sengaja tidak dipromosikan sebagai fitur aktif.

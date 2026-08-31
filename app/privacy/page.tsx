@@ -7,11 +7,11 @@ export default function PrivacyPage() {
     <>
       <Header />
       <main className="min-h-screen p-4 md:p-6">
-        <div className="max-w-3xl mx-auto glass rounded-3xl p-6 md:p-10 text-gray-700 dark:text-gray-200">
+        <div className="max-w-3xl mx-auto glass p-6 md:p-10">
           <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-            🔒 Kebijakan Privasi
+            Kebijakan Privasi
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center">
+          <p className="text-sm mb-6 text-center">
             Berlaku untuk situs <strong>J4Students</strong> — terakhir diperbarui: Agustus 2026
           </p>
 
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
               <p>
                 Jika Anda memiliki pertanyaan mengenai kebijakan privasi ini, silakan
                 hubungi kami di:{' '}
-                <a href="mailto:zyn@gmail.com" className="text-blue-600 dark:text-blue-400 underline">
+                <a href="mailto:zyn@gmail.com" className="text-[#2F49FF] underline">
                   zyn@gmail.com
                 </a>
               </p>

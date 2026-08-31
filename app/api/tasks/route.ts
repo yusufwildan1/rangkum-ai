@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { pool } from '@/lib/db';
 import { extractText } from '@/lib/fileParser';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 export const runtime = 'nodejs';
 
@@ -36,6 +37,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const userId = session.user.id;
+  const rate = checkRateLimit(`tasks:write:${userId}`, 40, 60_000);
+  if (!rate.allowed) return NextResponse.json({ error: 'Terlalu banyak perubahan. Coba lagi sebentar.' }, { status: 429, headers: { 'Retry-After': String(rate.retryAfter) } });
 
   let title: string;
   let dueDate: string | null = null;
@@ -91,6 +94,8 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const userId = session.user.id;
+  const rate = checkRateLimit(`tasks:write:${userId}`, 40, 60_000);
+  if (!rate.allowed) return NextResponse.json({ error: 'Terlalu banyak perubahan. Coba lagi sebentar.' }, { status: 429, headers: { 'Retry-After': String(rate.retryAfter) } });
   let body: { id?: string; title?: string; dueDate?: string | null; done?: boolean };
   try {
     body = await req.json();
@@ -139,6 +144,8 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const userId = session.user.id;
+  const rate = checkRateLimit(`tasks:write:${userId}`, 40, 60_000);
+  if (!rate.allowed) return NextResponse.json({ error: 'Terlalu banyak perubahan. Coba lagi sebentar.' }, { status: 429, headers: { 'Retry-After': String(rate.retryAfter) } });
   const id = req.nextUrl.searchParams.get('id');
   if (!id) {
     return NextResponse.json({ error: 'Missing id' }, { status: 400 });

@@ -120,19 +120,19 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
   };
 
   return (
-    <div className="glass rounded-3xl p-6 md:p-8">
+    <div className="glass p-6 md:p-8">
       <div className="flex flex-wrap justify-end items-center gap-2 mb-4">
         <div className="relative" ref={dropdownRef}>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/60 dark:bg-gray-800/70 border border-white/60 dark:border-gray-700/50 shadow-lg text-gray-800 dark:text-gray-100 hover:scale-105 hover:bg-white/80 dark:hover:bg-gray-700/80 transition text-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 glass-soft text-sm font-bold uppercase tracking-wide"
           >
             <FileIcon size={17} /> {currentLabel}
             <span className={`text-xs transition-transform ${open ? 'rotate-180' : ''}`}>▾</span>
           </button>
           {open && (
-            <div className="absolute right-0 mt-2 z-30 min-w-[7rem] bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/60 dark:border-gray-700/50 shadow-2xl rounded-2xl overflow-hidden p-1">
+            <div className="absolute right-0 mt-2 z-30 min-w-[7rem] glass p-1">
               {PAPER_SIZES.map((s) => (
                 <button
                   key={s.value}
@@ -141,10 +141,10 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
                     setPaperSize(s.value);
                     setOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-xl text-sm transition ${
+                  className={`w-full text-left px-3 py-2 text-sm font-bold uppercase transition ${
                     paperSize === s.value
-                      ? 'bg-blue-500/25 text-blue-700 dark:text-blue-300 font-semibold'
-                      : 'text-gray-800 dark:text-gray-100 hover:bg-blue-500/10 dark:hover:bg-gray-700/60'
+                      ? 'bg-[#FFD100] text-black'
+                      : 'text-[--ink] hover:bg-white/70'
                   }`}
                 >
                   {s.label}
@@ -155,7 +155,7 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
         </div>
         <button
           onClick={copyToClipboard}
-          className="px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm flex items-center gap-1"
+          className="px-4 py-2 glass-soft text-sm font-bold uppercase tracking-wide flex items-center gap-2"
         >
           {copied ? (
             <span className="flex items-center gap-1.5">
@@ -169,13 +169,13 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
         </button>
         <button
           onClick={downloadMarkdown}
-          className="px-4 py-2 rounded-full glass-soft text-gray-700 dark:text-gray-200 hover:scale-105 transition text-sm flex items-center gap-1"
+          className="px-4 py-2 glass-soft text-sm font-bold uppercase tracking-wide flex items-center gap-2"
         >
           <DownloadIcon size={17} /> .md
         </button>
         <button
           onClick={downloadPDF}
-          className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-105 transition text-sm flex items-center gap-1 shadow"
+          className="px-5 py-2 btn-fill text-sm font-bold uppercase tracking-wide flex items-center gap-2"
         >
           <PrinterIcon size={17} /> PDF
         </button>
@@ -209,13 +209,13 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
                 const words = <TypingWords text={children} />;
                 stepTyping(count);
                 return (
-                  <h1 className="border-b border-gray-200 dark:border-gray-700 pb-2">
+                  <h1 className="border-b-2 border-[--ink] pb-2">
                     {words}
                   </h1>
                 );
               }
               return (
-                <h1 className="border-b border-gray-200 dark:border-gray-700 pb-2">
+                <h1 className="border-b-2 border-[--ink] pb-2">
                   {children}
                 </h1>
               );
@@ -223,7 +223,7 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
             table({ children }) {
               return (
                 <div className="overflow-x-auto">
-                  <table className="border-collapse border border-gray-300 dark:border-gray-600">
+                  <table className="border-collapse border-2 border-[--ink]">
                     {children}
                   </table>
                 </div>
@@ -231,14 +231,14 @@ const SummaryOutput: React.FC<Props> = ({ summary, fileName }) => {
             },
             th({ children }) {
               return (
-                <th className="border border-gray-300 dark:border-gray-600 px-3 py-2 bg-gray-100 dark:bg-gray-700">
+                <th className="border-2 border-[--ink] px-3 py-2 bg-[#E4D8BE]">
                   {children}
                 </th>
               );
             },
             td({ children }) {
               return (
-                <td className="border border-gray-300 dark:border-gray-600 px-3 py-2">
+                <td className="border-2 border-[--ink] px-3 py-2">
                   {children}
                 </td>
               );

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { pool } from '@/lib/db';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 export const runtime = 'nodejs';
 
@@ -26,6 +27,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const userId = session.user.id;
+  const rate = checkRateLimit(`history:write:${userId}`, 30, 60_000);
+  if (!rate.allowed) return NextResponse.json({ error: 'Terlalu banyak perubahan. Coba lagi sebentar.' }, { status: 429, headers: { 'Retry-After': String(rate.retryAfter) } });
   let body: { fileName?: string; summary?: string };
   try {
     body = await req.json();
@@ -52,6 +55,8 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const userId = session.user.id;
+  const rate = checkRateLimit(`history:write:${userId}`, 30, 60_000);
+  if (!rate.allowed) return NextResponse.json({ error: 'Terlalu banyak perubahan. Coba lagi sebentar.' }, { status: 429, headers: { 'Retry-After': String(rate.retryAfter) } });
   const id = req.nextUrl.searchParams.get('id');
   const all = req.nextUrl.searchParams.get('all');
 

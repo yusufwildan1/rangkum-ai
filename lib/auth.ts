@@ -31,7 +31,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         .split(',')
         .map((e) => e.trim().toLowerCase())
         .filter(Boolean);
-      return allowed.includes(email.toLowerCase());
+      // Empty allowlist means public access. Fill ALLOWED_EMAILS only when a private rollout is needed.
+      return allowed.length === 0 || allowed.includes(email.toLowerCase());
     },
   },
 });

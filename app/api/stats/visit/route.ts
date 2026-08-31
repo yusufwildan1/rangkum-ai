@@ -33,8 +33,8 @@ export async function POST(req: NextRequest) {
       });
     }
     return response;
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : 'unknown';
-    return NextResponse.json({ error: msg }, { status: 500 });
+  } catch (error) {
+    console.error('Visit stats error:', error);
+    return NextResponse.json({ error: 'Statistik tidak tersedia saat ini.' }, { status: 500 });
   }
 }

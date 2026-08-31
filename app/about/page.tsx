@@ -54,25 +54,23 @@ export default function AboutPage() {
     <>
       <Header />
       <main className="min-h-screen p-4 md:p-6">
-        <div className="max-w-3xl mx-auto glass rounded-3xl p-6 md:p-10">
+        <div className="max-w-3xl mx-auto glass p-6 md:p-10">
           <div className="text-center mb-8">
-            <div className="mx-auto mb-6 w-20 h-20 rounded-3xl bg-gradient-to-br from-cyan-500 via-blue-600 to-fuchsia-600 shadow-[0_0_40px_rgba(34,224,255,0.45),0_0_70px_rgba(255,79,216,0.35)] ring-1 ring-white/20 flex items-center justify-center">
-              <span className="font-extrabold text-3xl tracking-tight text-white [text-shadow:0_0_14px_rgba(255,255,255,0.9)]">
+            <div className="mx-auto mb-6 w-20 h-20 bg-[#FF5A1F] border-[3px] border-[--ink] shadow-[5px_5px_0_0_#15161B] flex items-center justify-center">
+              <span className="font-bold text-3xl tracking-tight text-white">
                 SL
               </span>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold mb-3">
               Tentang{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400">
-                J4Students
-              </span>
+              <span className="text-[#2F49FF]">J4Students</span>
             </h1>
           </div>
 
-          <div className="space-y-6 text-gray-700 dark:text-gray-200">
+          <div className="space-y-6">
             <section>
-              <h2 className="text-xl font-semibold mb-2">
-                <SparkleIcon size={24} className="inline align-[-3px] mr-2 text-cyan-400" /> Apa
+              <h2 className="text-xl font-bold mb-2">
+                <SparkleIcon size={24} className="inline align-[-3px] mr-2 text-[#00C389]" /> Apa
                 itu?
               </h2>
               <p className="leading-relaxed">
@@ -84,8 +82,8 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">
-                <TargetIcon size={24} className="inline align-[-3px] mr-2 text-fuchsia-400" />{' '}
+              <h2 className="text-xl font-bold mb-3">
+                <TargetIcon size={24} className="inline align-[-3px] mr-2 text-[#7a63ff]" />{' '}
                 Apa saja yang bisa dilakukan?
               </h2>
               <div className="space-y-3">
@@ -97,18 +95,18 @@ export default function AboutPage() {
                       animate={{ scale: isOpen ? 1 : 1 }}
                       whileHover={{ scale: 1.015 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-                      className={`glass-soft rounded-2xl overflow-hidden transition-shadow duration-300 ${
+                      className={`glass-soft overflow-hidden transition-shadow duration-300 ${
                         isOpen
-                          ? 'ring-1 ring-cyan-400/30 shadow-[0_0_26px_rgba(34,224,255,0.25)]'
-                          : 'ring-1 ring-transparent'
+                          ? 'shadow-[5px_5px_0_0_#2F49FF]'
+                          : ''
                       }`}
                     >
                       <button
                         type="button"
                         onClick={() => toggle(index)}
-                        className="w-full flex items-center justify-between gap-3 px-4 py-3.5 text-left transition-colors duration-200 hover:bg-white/20 dark:hover:bg-gray-700/30"
+                        className="w-full flex items-center justify-between gap-3 px-4 py-3.5 text-left transition-colors duration-200 hover:bg-[#FFD100]"
                       >
-                        <span className="flex items-center gap-3 font-medium text-gray-800 dark:text-gray-100">
+                        <span className="flex items-center gap-3 font-bold">
                           <motion.span
                             animate={{ rotate: isOpen ? 8 : 0, scale: isOpen ? 1.15 : 1 }}
                             transition={{ type: 'spring', stiffness: 260, damping: 15 }}
@@ -121,10 +119,10 @@ export default function AboutPage() {
                         <motion.span
                           animate={{ rotate: isOpen ? 180 : 0 }}
                           transition={{ type: 'spring', stiffness: 200, damping: 16 }}
-                          className={`shrink-0 flex items-center justify-center w-7 h-7 rounded-full text-sm ${
+                          className={`shrink-0 flex items-center justify-center w-7 h-7 border-2 border-[--ink] text-sm ${
                             isOpen
-                              ? 'bg-cyan-400/20 text-cyan-400'
-                              : 'bg-gray-500/10 text-gray-500 dark:text-gray-300'
+                              ? 'bg-[#2F49FF] text-white'
+                              : 'bg-[#E4D8BE] text-[--ink]'
                           }`}
                         >
                           ▾
@@ -139,7 +137,7 @@ export default function AboutPage() {
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-                            className="overflow-hidden px-4 pb-4 space-y-2 list-disc list-inside text-gray-600 dark:text-gray-300 leading-relaxed"
+                            className="overflow-hidden px-4 pb-4 space-y-2 list-disc list-inside leading-relaxed"
                           >
                             {feature.points.map((point, i) => (
                               <motion.li
@@ -161,8 +159,8 @@ export default function AboutPage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">
-                <RocketIcon size={24} className="inline align-[-3px] mr-2 text-blue-400" /> Cara
+              <h2 className="text-xl font-bold mb-3">
+                <RocketIcon size={24} className="inline align-[-3px] mr-2 text-[#2F49FF]" /> Cara
                 memulai
               </h2>
               <p className="leading-relaxed">

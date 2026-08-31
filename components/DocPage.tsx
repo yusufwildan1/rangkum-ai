@@ -66,18 +66,18 @@ export default function DocPage({
           <nav className="mb-4 text-sm text-gray-500 dark:text-gray-400">
             <Link href="/" className="hover:text-gray-200 transition">Beranda</Link>
             <span className="mx-2">/</span>
-            <Link href="/#dokumentasi" className="hover:text-gray-200 transition">Documentation</Link>
+            <Link href="/documentation" className="hover:text-gray-200 transition">Documentation</Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-300 dark:text-gray-200">{title}</span>
+            <span className="text-gray-700 dark:text-gray-200">{title}</span>
           </nav>
 
           <div className="glass p-6 md:p-10">
             <div className="text-center mb-8">
               <div
                 className="mx-auto mb-6 w-20 h-20 flex items-center justify-center"
-                style={{ background: '#23262f', border: '3px solid #000', boxShadow: '5px 5px 0 0 #000' }}
+                style={{ background: color, border: '3px solid #000', boxShadow: '5px 5px 0 0 #000' }}
               >
-                {icon}
+                <span className="[&_svg]:text-white">{icon}</span>
               </div>
               <span className="inline-block mb-3">
                 <span
@@ -163,7 +163,7 @@ export default function DocPage({
                       <button
                         type="button"
                         onClick={() => setActive((prev) => (prev === index ? null : index))}
-                        className="w-full glass-soft px-4 py-3.5 text-left flex items-center justify-between gap-3 hover:bg-[#23262f] transition"
+                        className="w-full glass-soft px-4 py-3.5 text-left flex items-center justify-between gap-3 hover:bg-[#FFD100] transition"
                       >
                         <span className="font-medium text-gray-800 dark:text-gray-100">{section.title}</span>
                         <motion.span
@@ -214,7 +214,7 @@ export default function DocPage({
               >
                 Buka {toolLabel} →
               </Link>
-              <Link href="/#dokumentasi" className="brute-btn px-6 py-3 border-2 border-black text-gray-600 dark:text-gray-300 shadow-[3px_3px_0_0_#000] hover:bg-white/5 transition">
+              <Link href="/documentation" className="brute-btn px-6 py-3 border-2 border-black text-gray-600 dark:text-gray-300 shadow-[3px_3px_0_0_#000] hover:bg-white/5 transition">
                 ← Kembali ke dokumentasi
               </Link>
             </div>

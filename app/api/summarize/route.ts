@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { checkRateLimit } from '@/lib/rateLimit';
 import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
@@ -167,6 +168,10 @@ export async function POST(req: NextRequest) {
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    const rate = checkRateLimit(`summarize:${session.user.id}`, 8, 60_000);
+    if (!rate.allowed) {
+      return NextResponse.json({ error: 'Terlalu banyak permintaan. Coba lagi sebentar.' }, { status: 429, headers: { 'Retry-After': String(rate.retryAfter) } });
+    }
 
     const provider = (process.env.AI_PROVIDER || 'openai').toLowerCase();
 
@@ -194,11 +199,8 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ summary });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Summarize error:', error);
-    return NextResponse.json(
-      { error: 'Gagal merangkum dokumen: ' + (error?.message || 'unknown') },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Gagal merangkum dokumen. Silakan coba lagi.' }, { status: 500 });
   }
 }

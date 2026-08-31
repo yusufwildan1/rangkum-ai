@@ -31,6 +31,7 @@ const DEFAULT_ITEMS: MenuItem[] = [
   { label: 'Tentang', icon: <InfoIcon size={20} />, href: '/about' },
   { label: 'Rangkum AI', icon: <RocketIcon size={20} />, href: '/rangkum', description: 'Upload & rangkum dokumen' },
   { label: 'Jadwal Tugas', icon: <CalendarIcon size={20} />, href: '/jadwal-tugas', description: 'Kelola deadline tugas' },
+  { label: 'Kirim Testimoni', icon: <InfoIcon size={20} />, href: '/testimoni', description: 'Bagikan pengalamanmu' },
   { label: 'Documentation', icon: <ScrollIcon size={20} />, href: '/documentation', description: 'Panduan lengkap tools' },
 ];
 
@@ -58,7 +59,7 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-label="Buka menu"
-        className="nk-chip w-11 h-11 flex items-center justify-center rounded-full text-lg hover:scale-110 transition-all duration-200"
+        className="nk-chip w-11 h-11 flex items-center justify-center text-lg hover:scale-110 transition-all duration-200"
       >
         <span className="flex flex-col gap-1.5">
           {/* Ikon hamburger */}
@@ -84,7 +85,7 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -6 }}
             transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-            className="nk-menu-panel absolute right-0 mt-2 z-30 w-64 rounded-3xl overflow-hidden p-2 shadow-2xl origin-top-right"
+            className="nk-menu-panel absolute right-0 mt-2 z-30 w-64 overflow-hidden p-2 shadow-2xl origin-top-right"
           >
             <div className="px-3 pb-2 pt-1 text-xs uppercase tracking-wider text-gray-500">
               Menu
@@ -102,20 +103,20 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                     onClick={() => setOpen(false)}
                     className={`flex items-center gap-3 px-3 py-2.5 border-2 transition ${
                       isActive(item.href)
-                        ? 'bg-[#f5a623] border-[#7a4a12] text-[#3b2004] shadow-[3px_3px_0_0_#7a4a12]'
-                        : 'border-transparent hover:bg-[#ffd58a] hover:border-[#a0651a] hover:text-[#3b2004] hover:shadow-[3px_3px_0_0_#a0651a]'
+                        ? 'bg-[#FFD100] border-[--ink] text-[--ink] shadow-[3px_3px_0_0_#15161B]'
+                        : 'border-transparent hover:bg-[#FFD100] hover:border-[--ink] hover:text-[--ink] hover:shadow-[3px_3px_0_0_#15161B]'
                     }`}
                   >
                     <span className="flex items-center">{item.icon}</span>
                     <span className="flex-1">
-                      <span className="block font-medium">{item.label}</span>
+                      <span className="block font-bold">{item.label}</span>
                       {item.description && (
-                        <span className="block text-xs text-gray-500">
+                        <span className="block text-xs text-[--ink-soft]">
                           {item.description}
                         </span>
                       )}
                     </span>
-                    {isActive(item.href) && <span className="text-[#3b2004]">●</span>}
+                    {isActive(item.href) && <span className="text-[--ink]">■</span>}
                   </Link>
                 </motion.div>
               ))}
@@ -133,19 +134,19 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                     <img
                       src={session.user.image}
                       alt="avatar"
-                      className="w-9 h-9 rounded-full object-cover"
+                      className="w-9 h-9 object-cover border-2 border-[--ink]"
                     />
                   ) : (
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[--nk-cyan] to-[--nk-purple] flex items-center justify-center text-black font-bold">
+                    <div className="w-9 h-9 bg-[#2F49FF] border-2 border-[--ink] flex items-center justify-center text-white font-bold">
                       {(session.user.name?.[0] || '?').toUpperCase()}
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">
+                    <p className="text-sm font-bold truncate">
                       {session.user.name || 'Pengguna'}
                     </p>
                     {session.user.email && (
-                      <p className="text-xs text-gray-500 truncate">
+                      <p className="text-xs text-[--ink-soft] truncate">
                         {session.user.email}
                       </p>
                     )}
@@ -153,7 +154,7 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                 </div>
               ) : (
                 <div className="px-3 py-2 text-sm">
-                  <p className="text-gray-500 mb-1">
+                  <p className="text-[--ink-soft] mb-1">
                     Masuk untuk menyimpan data kamu.
                   </p>
                 </div>
@@ -163,14 +164,14 @@ const NavMenu: React.FC<Props> = ({ items = DEFAULT_ITEMS }) => {
                 {status === 'authenticated' ? (
                   <button
                     onClick={() => signOut({ callbackUrl: '/' })}
-                    className="w-full flex items-center gap-2 px-3 py-2 border-2 border-transparent text-left text-red-400 hover:bg-[#ff5f7a] hover:text-black hover:border-black hover:shadow-[3px_3px_0_0_#000] transition"
+                    className="w-full flex items-center gap-2 px-3 py-2 border-2 border-transparent text-left text-[#E8352B] hover:bg-[#E8352B] hover:text-white hover:border-[--ink] hover:shadow-[3px_3px_0_0_#15161B] transition"
                   >
                     <LogoutIcon size={19} /> Keluar
                   </button>
                 ) : (
                   <button
                     onClick={() => signIn('google', { callbackUrl: '/rangkum' })}
-                    className="w-full flex items-center gap-2 px-3 py-2 border-2 border-transparent text-left text-[#ffd58a] hover:bg-[#ffd58a] hover:text-[#3b2004] hover:border-[#a0651a] hover:shadow-[3px_3px_0_0_#a0651a] transition"
+                    className="w-full flex items-center gap-2 px-3 py-2 border-2 border-transparent text-left text-[#2F49FF] hover:bg-[#2F49FF] hover:text-white hover:border-[--ink] hover:shadow-[3px_3px_0_0_#15161B] transition"
                   >
                     <LoginIcon size={19} /> Masuk
                   </button>

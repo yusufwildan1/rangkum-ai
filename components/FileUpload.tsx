@@ -38,10 +38,10 @@ const FileUpload: React.FC<Props> = ({ onFileSelect }) => {
   return (
     <div
       {...getRootProps()}
-      className={`glass rounded-3xl p-10 md:p-14 text-center cursor-pointer transition-all duration-300 ${
+      className={`glass p-10 md:p-14 text-center cursor-pointer transition-all duration-300 ${
         isDragActive
-          ? '!border-blue-500 scale-[1.02] ring-4 ring-blue-500/30 shadow-2xl'
-          : 'hover:scale-[1.01] hover:shadow-2xl'
+          ? '!border-[#2F49FF] scale-[1.02] shadow-[8px_8px_0_0_#2F49FF]'
+          : 'hover:shadow-[8px_8px_0_0_#15161B]'
       }`}
     >
       <input {...getInputProps()} />
@@ -53,16 +53,16 @@ const FileUpload: React.FC<Props> = ({ onFileSelect }) => {
         {isDragActive ? <InboxIcon size={42} /> : <FolderIcon size={42} />}
       </div>
       {isDragActive ? (
-        <p className="text-blue-600 dark:text-blue-300 font-medium text-lg">
+        <p className="text-[#2F49FF] font-bold text-lg uppercase tracking-wide">
           Lepaskan file di sini...
         </p>
       ) : (
         <>
-          <p className="text-gray-700 dark:text-gray-200 font-medium">
+          <p className="font-bold uppercase tracking-wide">
             Drag &amp; drop file di sini, atau{' '}
-            <span className="text-blue-500 underline">klik untuk browse</span>
+            <span className="text-[#2F49FF] underline">klik untuk browse</span>
           </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-sm mt-1">
             Didukung: {ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(', ')} (maks {MAX_FILE_SIZE_MB}MB)
           </p>
         </>

@@ -129,35 +129,35 @@ export default function JadwalTugas({ initialTasks }: Props) {
     const late = days < 0;
     if (task.done) {
       return (
-        <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
+        <p className="text-sm flex items-center gap-1.5">
           <CalendarIcon size={15} /> {formatDate(task.dueDate)}
         </p>
       );
     }
     if (late) {
       return (
-        <p className="text-sm font-semibold text-red-600 dark:text-red-400 flex items-center gap-1.5">
+        <p className="text-sm font-bold text-[#E8352B] flex items-center gap-1.5">
           <AlertIcon size={16} /> Terlambat! {formatDate(task.dueDate)}
         </p>
       );
     }
     if (days === 0) {
       return (
-        <p className="text-sm font-semibold text-red-600 dark:text-red-400 flex items-center gap-1.5">
+        <p className="text-sm font-bold text-[#E8352B] flex items-center gap-1.5">
           <AlertIcon size={16} /> Deadline hari ini!
         </p>
       );
     }
     if (days <= NEAR_DAYS) {
       return (
-        <p className="text-sm font-semibold text-orange-600 dark:text-orange-400 flex flex-wrap items-center gap-x-1.5">
+        <p className="text-sm font-bold text-[#FF5A1F] flex flex-wrap items-center gap-x-1.5">
           <AlertIcon size={16} /> Hampir deadline — tersisa {days} hari (
           <CalendarIcon size={14} /> {formatDate(task.dueDate)})
         </p>
       );
     }
     return (
-      <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
+      <p className="text-sm flex items-center gap-1.5">
         <CalendarIcon size={15} /> {formatDate(task.dueDate)}
       </p>
     );
@@ -171,23 +171,23 @@ export default function JadwalTugas({ initialTasks }: Props) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.85, y: -12 }}
         transition={{ type: 'spring', stiffness: 320, damping: 26 }}
-        className="glass-soft rounded-2xl px-4 py-3 flex items-center gap-3"
+        className="glass-soft px-4 py-3 flex items-center gap-3"
       >
         <button
           onClick={() => toggleTask(task.id)}
           aria-label="Tandai selesai"
-          className={`nk-btn-anim w-6 h-6 shrink-0 rounded-full border-2 flex items-center justify-center text-sm hover:scale-110 nk-btn-glow-green ${
+          className={`nk-btn-anim w-6 h-6 shrink-0 border-2 flex items-center justify-center text-sm nk-btn-glow-green ${
             task.done
-              ? 'bg-green-500 border-green-500 text-white'
-              : 'border-gray-400 dark:border-gray-500 hover:border-green-500'
+              ? 'bg-[#00C389] border-[--ink] text-black'
+              : 'border-[--ink] hover:border-[#00C389]'
           }`}
         >
           {task.done && <CheckIcon size={14} />}
         </button>
-        <button onClick={() => setViewing(task)} className="nk-btn-anim flex-1 min-w-0 text-left group text-gray-800 dark:text-gray-100">
+        <button onClick={() => setViewing(task)} className="nk-btn-anim flex-1 min-w-0 text-left group text-[--ink]">
           <p
-            className={`truncate font-semibold text-base ${
-              task.done ? 'line-through text-gray-400 dark:text-gray-500' : 'group-hover:text-[--neon-cyan] transition'
+            className={`truncate font-bold text-base ${
+              task.done ? 'line-through text-[--ink-soft]' : 'group-hover:text-[#2F49FF] transition'
             }`}
           >
             {task.title}
@@ -195,7 +195,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
           <div className="mt-0.5 space-y-0.5">
             {task.dueDate && dateBadge(task)}
             {task.fileName && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
+              <p className="text-sm flex items-center gap-1.5">
                 <PaperclipIcon size={14} /> {task.fileName}
               </p>
             )}
@@ -204,7 +204,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
         <button
           onClick={() => removeTask(task.id)}
           aria-label="Hapus tugas"
-          className="nk-btn-anim nk-btn-glow-red shrink-0 p-1.5 rounded-full text-red-500 hover:text-red-700"
+          className="nk-btn-anim nk-btn-glow-red shrink-0 p-1.5 text-[#E8352B] hover:text-black"
         >
           <XIcon size={18} />
         </button>
@@ -228,7 +228,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
     <div className="flex items-center gap-2.5 mb-3">
       {icon}
       <h2 className={`text-xl font-bold ${textClass}`}>{titleText}</h2>
-      <span className={`px-2 py-0.5 rounded-full ${badgeClass} text-xs font-bold`}>{count}</span>
+      <span className={`px-2 py-0.5 border-2 border-[--ink] ${badgeClass} text-xs font-bold`}>{count}</span>
     </div>
   );
 
@@ -242,7 +242,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
         <p className="hero-note mt-4">catat &amp; pantau deadline tugasmu</p>
       </div>
 
-      <div className="glass rounded-3xl p-5 mb-6 pr-5">
+      <div className="glass p-5 mb-6 pr-5">
         <div className="flex items-center gap-3">
           <input
             type="text"
@@ -257,7 +257,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
             onClick={openPicker}
             aria-label="Pilih tanggal"
             title={dueDate ? `Ubah tanggal: ${formatDateShort(dueDate)}` : 'Pilih tanggal'}
-            className="nk-btn-anim shrink-0 flex items-center gap-2 px-3 py-2.5 bg-[#2a2d37] border-2 border-[#000] text-[--ink-soft] hover:text-[#3b2004] hover:bg-[#ffd58a] hover:border-[#a0651a] hover:shadow-[3px_3px_0_0_#a0651a] transition"
+            className="nk-btn-anim shrink-0 flex items-center gap-2 px-3 py-2.5 bg-[#FFD100] border-2 border-[#000] text-[#15161B] hover:bg-[#FF5A1F] transition"
           >
             <CalendarIcon size={22} className="shrink-0" />
             {dueDate && (
@@ -274,8 +274,8 @@ export default function JadwalTugas({ initialTasks }: Props) {
             onClick={openPicker}
             className="js-date sr-only"
           />
-          <label className="me-1 shrink-0 flex items-center gap-2 px-4 py-3 rounded-full cursor-pointer border border-[--card-border] bg-[--card-bg] text-[--ink] hover:border-[--neon-pink]/60 hover:scale-[1.03] transition text-sm">
-            <PaperclipIcon size={18} className="text-[--neon-pink]" />
+          <label className="me-1 shrink-0 flex items-center gap-2 px-4 py-3 cursor-pointer border-2 border-[--ink] bg-[--card-bg] text-[--ink] hover:bg-[#FFD100] transition text-sm">
+            <PaperclipIcon size={18} className="text-[#FF5A1F]" />
             <span className="max-w-[9rem] truncate">{file ? file.name : 'Lampirkan'}</span>
             <input
               type="file"
@@ -294,7 +294,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
       </div>
 
       {tasks.length === 0 ? (
-        <div className="glass-soft rounded-3xl p-10 text-center text-gray-500 dark:text-gray-400">
+        <div className="glass-soft p-10 text-center">
           Belum ada tugas. Tambahkan tugas pertamamu di atas.
         </div>
       ) : (
@@ -305,11 +305,11 @@ export default function JadwalTugas({ initialTasks }: Props) {
                 icon={<AlertIcon size={22} />}
                 titleText="Hampir Deadline"
                 count={nearTasks.length}
-                textClass="text-orange-600 dark:text-orange-400"
-                badgeClass="bg-orange-500/20 text-orange-600 dark:text-orange-300"
+                textClass="text-[#FF5A1F]"
+                badgeClass="bg-[#FF5A1F] text-white"
               />
               <AnimatePresence initial={false}>
-                <motion.ul layout className="space-y-2 border-l-2 border-orange-400 pl-3">
+                <motion.ul layout className="space-y-2 border-l-4 border-[#FF5A1F] pl-3">
                   {nearTasks.map((task) => (
                     <TaskRow key={task.id} task={task} />
                   ))}
@@ -324,8 +324,8 @@ export default function JadwalTugas({ initialTasks }: Props) {
                 icon={<CalendarIcon size={22} />}
                 titleText="Belum Deadline"
                 count={upcomingTasks.length}
-                textClass="text-gray-700 dark:text-gray-200"
-                badgeClass="bg-blue-500/20 text-blue-600 dark:text-blue-300"
+                textClass="text-[#2F49FF]"
+                badgeClass="bg-[#2F49FF] text-white"
               />
               <AnimatePresence initial={false}>
                 <motion.ul layout className="space-y-2">
@@ -343,8 +343,8 @@ export default function JadwalTugas({ initialTasks }: Props) {
                 icon={<CheckIcon size={22} />}
                 titleText="Tugas Selesai"
                 count={doneTasks.length}
-                textClass="text-green-600 dark:text-green-400"
-                badgeClass="bg-green-500/20 text-green-600 dark:text-green-300"
+                textClass="text-[#00C389]"
+                badgeClass="bg-[#00C389] text-black"
               />
               <AnimatePresence initial={false}>
                 <motion.ul layout className="space-y-2">
@@ -360,17 +360,17 @@ export default function JadwalTugas({ initialTasks }: Props) {
 
       {viewing && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70"
           onClick={() => setViewing(null)}
         >
           <div
-            className="glass rounded-3xl w-full max-w-lg max-h-[85vh] flex flex-col overflow-hidden"
+            className="glass w-full max-w-lg max-h-[85vh] flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-start justify-between gap-3 px-6 pt-5 pb-3">
+            <div className="flex items-start justify-between gap-3 px-6 pt-5 pb-3 border-b-2 border-[--ink]">
               <div className="min-w-0">
-                <h3 className="text-xl font-bold text-gray-100 truncate">{viewing.title}</h3>
-                <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-gray-400">
+                <h3 className="text-xl font-bold text-[--ink] truncate">{viewing.title}</h3>
+                <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                   {viewing.dueDate && (
                     <span className="text-sm flex items-center gap-1">
                       <CalendarIcon size={15} /> {formatDate(viewing.dueDate)}
@@ -382,7 +382,7 @@ export default function JadwalTugas({ initialTasks }: Props) {
                     </span>
                   )}
                   {viewing.done && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300 font-semibold">
+                    <span className="text-xs px-2 py-0.5 border-2 border-[--ink] bg-[#00C389] text-black font-bold">
                       Selesai
                     </span>
                   )}
@@ -391,18 +391,18 @@ export default function JadwalTugas({ initialTasks }: Props) {
               <button
                 onClick={() => setViewing(null)}
                 aria-label="Tutup"
-                className="nk-btn-anim nk-btn-glow-red shrink-0 p-1.5 rounded-full hover:bg-white/10 text-gray-300"
+                className="nk-btn-anim nk-btn-glow-red shrink-0 p-1.5 hover:bg-white/10 text-[--ink]"
               >
                 <XIcon size={20} />
               </button>
             </div>
             <div className="px-6 pb-6 overflow-y-auto">
               {viewing.content ? (
-                <pre className="whitespace-pre-wrap break-words text-sm leading-relaxed text-gray-200 bg-black/30 border border-[--card-border] rounded-2xl p-4">
+                <pre className="whitespace-pre-wrap break-words text-sm leading-relaxed text-[--ink] bg-white border-2 border-[--ink] p-4">
                   {viewing.content}
                 </pre>
               ) : (
-                <p className="text-sm text-gray-400">
+                <p className="text-sm">
                   Tidak ada lampiran untuk tugas ini.
                 </p>
               )}

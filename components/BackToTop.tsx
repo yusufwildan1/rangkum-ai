@@ -17,7 +17,7 @@ export default function BackToTop() {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Kembali ke atas"
-      className={`fixed bottom-6 right-6 z-30 w-12 h-12 rounded-full border border-purple-400/40 bg-slate-900/80 text-cyan-300 flex items-center justify-center shadow-[0_0_18px_rgba(167,139,255,0.35)] backdrop-blur-md hover:scale-110 hover:shadow-[0_0_26px_rgba(167,139,255,0.6)] transition-all duration-300 ${
+      className={`fixed bottom-6 right-6 z-30 w-12 h-12 bg-[#15161B] text-[#FFD100] border-[3px] border-[#15161B] shadow-[4px_4px_0_0_#15161B] flex items-center justify-center hover:bg-[#FF5A1F] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-150 ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'
       }`}
     >

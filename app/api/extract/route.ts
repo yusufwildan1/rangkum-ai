@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { checkRateLimit } from '@/lib/rateLimit';
 import { extractText } from '@/lib/fileParser';
 
 export const runtime = 'nodejs';
@@ -11,6 +12,10 @@ export async function POST(req: NextRequest) {
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    const rate = checkRateLimit(`extract:${session.user.id}`, 15, 60_000);
+    if (!rate.allowed) {
+      return NextResponse.json({ error: 'Terlalu banyak unggahan. Coba lagi sebentar.' }, { status: 429, headers: { 'Retry-After': String(rate.retryAfter) } });
+    }
 
     const formData = await req.formData();
     const file = formData.get('file') as File | null;
@@ -21,11 +26,8 @@ export async function POST(req: NextRequest) {
 
     const text = await extractText(file);
     return NextResponse.json({ text, fileName: file.name });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Extract error:', error);
-    return NextResponse.json(
-      { error: 'Gagal mengekstrak teks: ' + (error?.message || 'unknown') },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Gagal mengekstrak teks dari file. Periksa format dan ukuran file.' }, { status: 500 });
   }
 }

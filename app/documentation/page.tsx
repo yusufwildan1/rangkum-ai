@@ -48,9 +48,9 @@ export default function DocumentationPage() {
               >
                 <div
                   className="mb-4 w-16 h-16 flex items-center justify-center doc-index-icon"
-                  style={{ background: '#23262f', border: '3px solid #000', boxShadow: '4px 4px 0 0 #000' }}
+                  style={{ background: d.color, border: '3px solid #000', boxShadow: '4px 4px 0 0 #000' }}
                 >
-                  {d.icon}
+                  <span className="text-[#fff] [&_svg]:text-white">{d.icon}</span>
                 </div>
                 <h2 className="text-xl font-semibold mb-2" style={{ color: d.color }}>{d.title}</h2>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">{d.desc}</p>
